@@ -1,0 +1,60 @@
+[
+  {
+    "_id": "5c88fa8cf4afda39709c2955",
+    "name": "Mushroom Shaped Cat Toy Scratcher",
+    "price": 25.99,
+    "type": "Toy",
+    "subType": "Scratching Toy",
+    "animal": ["Cat"],
+    "color": ["red/white", "green/ white", "grey/white"],
+    "features": [
+      "Entertain your cat with this scratcher. It can release the cat‘s nature, help you save your house items.",
+      "The scratcher can not only be a cat scratcher, but also a toy to play with.",
+      "The pet natural sisal cat scratcher is made of 100% natural and biodegradable materials."
+    ],
+    "primaryImage": "https://i.ibb.co/YbJFygc/toy1-0.jpg",
+    "otherImages": [
+      "https://i.ibb.co/1m3N9PP/toy1-1.jpg",
+      "https://i.ibb.co/C5kkxJG/toy1-2.jpg",
+      "https://i.ibb.co/VLhszy8/toy1-3.jpg"
+    ]
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2961",
+    "name": "Cat Ear Shaped Cat Scratching Pad",
+    "price": 19.99,
+    "type": "Toy",
+    "subType": "Scratching Toy",
+    "animal": ["Cat"],
+    "color": ["kiwi", "blue", "watermelon"],
+    "features": [
+      "Entertain your cat with this scratcher. It can release the cat‘s nature, help you save your house items.",
+      "The scratcher mat can not only be a cat scratch pad, play mat, but also a sleeping mat, a litter mat, of course, you can also use it as a mat of the door",
+      "This cat scratcher is made in the finest quality corrugated board, solid and durable, offering cats the healthiest play experience.",
+      "The pet natural sisal cat scratcher is made of 100% natural and biodegradable materials."
+    ],
+    "primaryImage": "https://i.ibb.co/h8C58GL/toy2-0.jpg",
+    "otherImages": [
+      "https://i.ibb.co/bm6GtwX/toy2-1.jpg",
+      "https://i.ibb.co/V3PtxHd/toy2-2.jpg"
+    ]
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c295d",
+    "name": "Cat Toy Tooth Cleaning Stick",
+    "price": 15.99,
+    "type": "Toy",
+    "subType": "Teaser Toy",
+    "animal": ["Cat"],
+    "style": ["avocado", "cherry"],
+    "features": [
+      "Let the cat clean her teeth while playing with this cute toy.",
+      "Attract the cat's interests. Contains Matatabi and catnip"
+    ],
+    "primaryImage": "https://i.ibb.co/37SNzqw/toy3-0.jpg",
+    "otherImages": [
+      "https://i.ibb.co/nwJrSc2/toy3-2.jpg",
+      "https://i.ibb.co/LdcdHqS/toy3-1.jpg"
+    ]
+  }
+]
