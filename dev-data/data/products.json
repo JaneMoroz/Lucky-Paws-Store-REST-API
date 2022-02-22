@@ -56,5 +56,73 @@
       "https://i.ibb.co/nwJrSc2/toy3-2.jpg",
       "https://i.ibb.co/LdcdHqS/toy3-1.jpg"
     ]
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c35ed",
+    "name": "Naughty Cat Ceramic Pet Bowls",
+    "price": 49.99,
+    "type": "Feeders",
+    "subType": "Bowl",
+    "animal": ["Cat"],
+    "color": ["blue", "red"],
+    "features": [
+      "These Series are designed with the idea of Ancient Allusions, gives an oriental look..",
+      "In an antibacterial glaze, the water absorption rate is less than 0.003%",
+      "Hand-painted gold stroke, High-temperature heating, long-lasting color",
+      "Suitable for most cats' body height, avoid curling up when eating"
+    ],
+    "primaryImage": "https://i.ibb.co/SrBd2cs/toy6-2.jpg",
+    "otherImages": [
+      "https://i.ibb.co/wRvvNBP/toy6-1.jpg",
+      "https://i.ibb.co/WkR9PgW/toy6-0.jpg"
+    ]
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2999",
+    "name": "Cactus Shaped Elevated Ceramic Cat Bowl",
+    "price": 49.99,
+    "type": "Feeders",
+    "subType": "Bowl",
+    "animal": ["Cat"],
+    "style": ["single cactus", "double cactus"],
+    "features": [
+      "The bowl is bacteria resistant and lead-free, making it a safe choice for feeding your small pet.",
+      "Elevated bowl puts your pet’s mouth in a better position, relieving strain while eating and reducing common vomiting during and after meals.",
+      "Perfect for flat-faced cats and dogs, or cats who are occasionally pushed off the bowl.",
+      "Stable base reduces the number of tipped bowls, messy floors, and annoying clean-up."
+    ],
+    "primaryImage": "https://i.ibb.co/Tg175Pp/toy7-0.jpg"
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c7654",
+    "name": "Rabbit Ceramic Pet Drinking Fountain",
+    "price": 59.99,
+    "type": "Feeders",
+    "subType": "Drinking Fountain",
+    "animal": ["Cat"],
+    "features": [
+      "Rabbit Automatic Power Off USB Drinking Fountain is a cute cat water fountain with a steady flow of filtered water.",
+      "Each part can be detachable, easy to clean",
+      "Automatic filtration system living water cycle. The smooth bottom is repeatedly polished, without hurting the ground.",
+      "The smart sensor automatically cut off the power supply when lacking water, preventing dry burning"
+    ],
+    "primaryImage": "https://i.ibb.co/Y7jTkTP/toy5-1.jpg",
+    "otherImages": ["https://i.ibb.co/6nwWhPT/toy5-0.jpg"]
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c4321",
+    "name": "Cactus Style Cat Drinking Fountain",
+    "price": 39.99,
+    "type": "Feeders",
+    "subType": "Drinking Fountain",
+    "animal": ["Cat"],
+    "features": [
+      "Cactus Automatic Power Off USB Drinking Fountain is a cute cat water fountain with a steady flow of filtered water.",
+      "Each part can be detachable, easy to clean",
+      "Automatic filtration system living water cycle. The smooth bottom is repeatedly polished, without hurting the ground.",
+      "The smart sensor automatically cut off the power supply when lacking water, preventing dry burning"
+    ],
+    "primaryImage": "https://i.ibb.co/x5dZRM7/toy4-0.jpg",
+    "otherImages": ["https://i.ibb.co/gP3whQ5/toy4-1.jpg"]
   }
 ]
