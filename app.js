@@ -4,7 +4,8 @@ const morgan = require('morgan');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
-const productRouter = require('./routes/productRouter');
+const productRoutes = require('./routes/productRoutes');
+const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
@@ -23,9 +24,10 @@ app.use(express.json());
 // Routes
 
 // Products
-app.use('/api/v1/products', productRouter);
+app.use('/api/v1/products', productRoutes);
 
 // Users
+app.use('/api/v1/users', userRouter);
 
 // Reviews
 
