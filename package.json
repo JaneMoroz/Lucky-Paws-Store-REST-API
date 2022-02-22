@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start:nodemon": "npx nodemon server.js",
-    "start:nodemon:prod": "SET NODE_ENV=production&&npx nodemon server.js"
+    "start:nodemon:prod": "SET NODE_ENV=production&&npx nodemon server.js",
+    "debug": "ndb server.js"
   },
   "repository": {
     "type": "git",

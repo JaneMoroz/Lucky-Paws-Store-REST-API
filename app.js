@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
+const productRouter = require('./routes/productRouter');
+
 const app = express();
 
 ////////////////////////////////////////////////////////////////
@@ -14,10 +16,14 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
+// Express middleware: body parser, reading data from body into rq.body
+app.use(express.json());
+
 ////////////////////////////////////////////////////////////////
 // Routes
 
 // Products
+app.use('/api/v1/products', productRouter);
 
 // Users
 
