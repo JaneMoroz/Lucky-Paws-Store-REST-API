@@ -6,6 +6,7 @@ const globalErrorHandler = require('./controllers/errorController');
 
 const productRoutes = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
+const reviewRouter = require('./routes/reviewRoutes');
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use('/api/v1/products', productRoutes);
 app.use('/api/v1/users', userRouter);
 
 // Reviews
+app.use('/api/v1/reviews', reviewRouter);
 
 ////////////////////////////////////////////////////////////////
 // Handling Unhandled Routes
