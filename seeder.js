@@ -8,7 +8,7 @@ dotenv.config({ path: './.env.development.local' });
 
 ////////////////////////////////////////////////////////////////
 // Models
-const Product = require('./../../models/productModel');
+const Product = require('./models/productModel');
 
 ////////////////////////////////////////////////////////////////
 // Connect to DB
@@ -23,9 +23,7 @@ async function dbConnect() {
 
 ////////////////////////////////////////////////////////////////
 // Read JSON file
-const products = JSON.parse(
-  fs.readFileSync(`${__dirname}/products.json`, 'utf-8')
-);
+const products = JSON.parse(fs.readFileSync('./data/products.json', 'utf-8'));
 
 // Import DATA into DB
 const importData = async () => {
