@@ -17,7 +17,8 @@
       "https://i.ibb.co/1m3N9PP/toy1-1.jpg",
       "https://i.ibb.co/C5kkxJG/toy1-2.jpg",
       "https://i.ibb.co/VLhszy8/toy1-3.jpg"
-    ]
+    ],
+    "countInStock": 200
   },
   {
     "_id": "5c88fa8cf4afda39709c2961",
@@ -37,7 +38,8 @@
     "otherImages": [
       "https://i.ibb.co/bm6GtwX/toy2-1.jpg",
       "https://i.ibb.co/V3PtxHd/toy2-2.jpg"
-    ]
+    ],
+    "countInStock": 150
   },
   {
     "_id": "5c88fa8cf4afda39709c295d",
@@ -55,7 +57,8 @@
     "otherImages": [
       "https://i.ibb.co/nwJrSc2/toy3-2.jpg",
       "https://i.ibb.co/LdcdHqS/toy3-1.jpg"
-    ]
+    ],
+    "countInStock": 200
   },
   {
     "_id": "5c88fa8cf4afda39709c35ed",
@@ -75,7 +78,8 @@
     "otherImages": [
       "https://i.ibb.co/wRvvNBP/toy6-1.jpg",
       "https://i.ibb.co/WkR9PgW/toy6-0.jpg"
-    ]
+    ],
+    "countInStock": 100
   },
   {
     "_id": "5c88fa8cf4afda39709c2999",
@@ -91,7 +95,8 @@
       "Perfect for flat-faced cats and dogs, or cats who are occasionally pushed off the bowl.",
       "Stable base reduces the number of tipped bowls, messy floors, and annoying clean-up."
     ],
-    "primaryImage": "https://i.ibb.co/Tg175Pp/toy7-0.jpg"
+    "primaryImage": "https://i.ibb.co/Tg175Pp/toy7-0.jpg",
+    "countInStock": 60
   },
   {
     "_id": "5c88fa8cf4afda39709c7654",
@@ -107,7 +112,8 @@
       "The smart sensor automatically cut off the power supply when lacking water, preventing dry burning"
     ],
     "primaryImage": "https://i.ibb.co/Y7jTkTP/toy5-1.jpg",
-    "otherImages": ["https://i.ibb.co/6nwWhPT/toy5-0.jpg"]
+    "otherImages": ["https://i.ibb.co/6nwWhPT/toy5-0.jpg"],
+    "countInStock": 200
   },
   {
     "_id": "5c88fa8cf4afda39709c4321",
@@ -123,6 +129,7 @@
       "The smart sensor automatically cut off the power supply when lacking water, preventing dry burning"
     ],
     "primaryImage": "https://i.ibb.co/x5dZRM7/toy4-0.jpg",
-    "otherImages": ["https://i.ibb.co/gP3whQ5/toy4-1.jpg"]
+    "otherImages": ["https://i.ibb.co/gP3whQ5/toy4-1.jpg"],
+    "countInStock": 100
   }
 ]

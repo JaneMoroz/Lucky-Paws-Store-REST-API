@@ -52,10 +52,6 @@ const productSchema = new mongoose.Schema(
       required: [true, 'A product needs an image'],
     },
     otherImages: [String],
-    addedAt: {
-      type: Date,
-      default: Date.now,
-    },
     ratingsAverage: {
       type: Number,
       default: 4.5,
@@ -66,6 +62,24 @@ const productSchema = new mongoose.Schema(
     ratingsQuantity: {
       type: Number,
       default: 0,
+    },
+    countInStock: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    taxable: {
+      type: Boolean,
+      default: false,
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
+    updated: Date,
+    created: {
+      type: Date,
+      default: Date.now,
     },
   },
   {

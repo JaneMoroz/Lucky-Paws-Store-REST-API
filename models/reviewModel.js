@@ -85,8 +85,6 @@ reviewSchema.post('save', function () {
 
 // Calc average on update
 reviewSchema.post(/^findOneAnd/, async function (doc) {
-  console.log('Calc on update');
-  console.log(doc);
   if (doc) {
     await doc.constructor.calcAverageRatings(doc.product);
   }
