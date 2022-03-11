@@ -8,6 +8,7 @@ const productRoutes = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const cartRouter = require('./routes/cartRoutes');
+const orderRouter = require('./routes/orderRoutes');
 
 const app = express();
 
@@ -36,6 +37,9 @@ app.use('/api/v1/reviews', reviewRouter);
 
 // Cart
 app.use('/api/v1/cart', cartRouter);
+
+// Order
+app.use('/api/v1/order', orderRouter);
 
 ////////////////////////////////////////////////////////////////
 // Handling Unhandled Routes

@@ -7,6 +7,7 @@ exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
     let filter = {};
     if (req.params.productId) filter = { product: req.params.productId };
+    if (req.params.userId) filter = { user: req.params.userId };
     const features = new APIFeatures(Model.find(filter), req.query)
       .filter()
       .sort()
@@ -33,6 +34,17 @@ exports.getOne = (Model, popOptions) =>
 
     if (!doc) {
       return next(new AppError('No document found with that ID', 404));
+    }
+    console.log(req.params.userId);
+    console.log(doc.user);
+
+    if (req.params.userId && String(req.params.userId) !== String(doc.user)) {
+      return next(
+        new AppError(
+          'There is an error with accessing this order, try again later',
+          404
+        )
+      );
     }
 
     res.status(200).json({

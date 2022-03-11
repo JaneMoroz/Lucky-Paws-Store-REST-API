@@ -51,6 +51,10 @@ const CartSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    ordered: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     toJSON: { virtuals: true },

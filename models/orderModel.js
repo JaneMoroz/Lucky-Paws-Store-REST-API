@@ -82,6 +82,15 @@ const OrderSchema = new mongoose.Schema(
   }
 );
 
+// Populate order middleware
+OrderSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'cart',
+    select: 'products',
+  });
+  next();
+});
+
 const Order = mongoose.model('Order', OrderSchema);
 
 module.exports = Order;
