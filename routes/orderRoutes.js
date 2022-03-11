@@ -24,14 +24,14 @@ router
 // Change order status routes
 router
   .route('/:id/pay')
-  .put(
+  .patch(
     authController.restrictTo('admin', 'manager'),
     orderController.updateOrderToPaid
   );
 
 router
   .route('/:id/deliver')
-  .put(
+  .patch(
     authController.restrictTo('admin', 'manager'),
     orderController.updateOrderToDelivered
   );
