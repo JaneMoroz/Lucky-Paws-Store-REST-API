@@ -1,0 +1,19 @@
+// Account Details
+div(class="account__details")
+  form.form.form--big(action="submit")
+    h1(class="form__title heading-primary--main") Your account settings
+    div(class="form__group")
+      input#name(type="text", class="form__input", placeholder="Name", required)
+    div(class="form__group")
+      input#email(type="email", class="form__input", placeholder="Email", required)
+    div(class="form__group")
+      input#currentPassword(type="password", class="form__input", placeholder="Current Password", required)
+    div(class="form__group")
+      input#password(type="password", class="form__input", placeholder="Password", required)
+    div(class="form__group")
+      input#confirmPassword(type="password", class="form__input", placeholder="Confirm Password", required)
+    div(class="form__group form__photo-upload")
+      img(src="/img/users/user-1.jpg", alt="Anna Lurdes", class="form__user-photo")
+      a.btn.btn-text(href="#") Choose new photo
+    div(class="form__group")
+      a.btn.btn-color.btn-color--primary  Save Settings 
