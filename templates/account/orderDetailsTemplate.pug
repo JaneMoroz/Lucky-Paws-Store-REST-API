@@ -1,0 +1,35 @@
+.order
+  h2(class="order__data heading-tertiary") 23 July 2021
+  ul(class="order__products-list")
+    li(class="order__product")
+      span(class="order__product-details")
+        img(src="/img/products/product-1.jpg", alt="Product 1", class="order__product-img")
+        a.btn.btn-text--sub(href="#") Awersome Bed
+      span(class="order__product-price") $70
+  div(class="order__price")
+    span(class="order__price-name") Subtotal:
+    span $109.99
+    span(class="order__price-name") Taxes:
+    span $10
+    span(class="order__price-name") Shipping Price:
+    span $20
+    span(class="order__price-name order__price-total") Total:
+    span $139.99
+  div(class="order__details")
+    div(class="order__customer")
+      span(class="order__customer-name") Jacklin Monroe
+      span(class="order__customer-address") Whitechapel St. 87-19A
+    div(class="order__statuses")
+      div(class="order__status")
+        input(type="checkbox")
+        | Paid
+      div(class="order__status")
+        input(type="checkbox")
+        | Delivered
+      div(class="order__status")
+        span &amp;nbsp;
+        | Paid
+      div(class="order__status")
+        span &amp;nbsp;
+        | Delivered
+  a(class="order__btn btn btn-color btn-color--mixed") Save

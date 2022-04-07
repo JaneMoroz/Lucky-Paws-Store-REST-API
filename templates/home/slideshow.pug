@@ -1,0 +1,52 @@
+.slideshow-container
+  // Slide 1
+  .slide.sliding
+    div(class="slide__img-box")
+      img(src="/img/hero/hero-1.jpg", alt="slide 1")
+    div(class="slide__text-box")
+      h1.heading-primary
+        span.heading-primary--main  new! new! new! 
+        span.heading-primary--sub
+          | New toys from the famous japan brand “Pinky”
+      a.btn.btn-color.btn-color--secondary.btn--animated(href="#")
+        | View All
+        svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+          path(stroke-linecap="round", stroke-linejoin="round", d="M17 8l4 4m0 0l-4 4m4-4H3")
+  // Slide 2
+  .slide.sliding
+    div(class="slide__img-box")
+      img(src="/img/hero/hero-2.jpg", alt="slide 2")
+    div(class="slide__text-box")
+      h1.heading-primary
+        span.heading-primary--main  new! new! new! 
+        span.heading-primary--sub
+          | New toys from the famous japan brand “Pinky”
+      a.btn.btn-color.btn-color--secondary.btn--animated(href="#")
+        | View All
+        svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+          path(stroke-linecap="round", stroke-linejoin="round", d="M17 8l4 4m0 0l-4 4m4-4H3")
+  // Slide 3
+  .slide.sliding
+    div(class="slide__img-box")
+      img(src="/img/hero/hero-3.jpg", alt="slide 3")
+    div(class="slide__text-box")
+      h1.heading-primary
+        span.heading-primary--main  new! new! new! 
+        span.heading-primary--sub
+          | New toys from the famous japan brand “Pinky”
+      a.btn.btn-color.btn-color--secondary.btn--animated(href="#")
+        | View All
+        svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+          path(stroke-linecap="round", stroke-linejoin="round", d="M17 8l4 4m0 0l-4 4m4-4H3")
+  // Next and previous buttons
+  a(class="btn btn-icon btn-icon--left-arrow slideshow-container__prev", onclick="plusSlides(-1)")
+    svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+      path(stroke-linecap="round", stroke-linejoin="round", d="M15 19l-7-7 7-7")
+  a(class="btn btn-icon btn-icon--right-arrow slideshow-container__next", onclick="plusSlides(1)")
+    svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+      path(stroke-linecap="round", stroke-linejoin="round", d="M9 5l7 7-7 7")
+  // Slides Carousel Dotes
+  .dots
+    span.dot(onclick="currentSlide(1)")
+    span.dot(onclick="currentSlide(2)")
+    span.dot(onclick="currentSlide(3)")
