@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 
@@ -9,11 +10,19 @@ const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const cartRouter = require('./routes/cartRoutes');
 const orderRouter = require('./routes/orderRoutes');
+const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
 
+// Setting PUG view engine
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+
 ////////////////////////////////////////////////////////////////
 // Global Middlewares
+
+// Serving static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {
@@ -25,6 +34,9 @@ app.use(express.json());
 
 ////////////////////////////////////////////////////////////////
 // Routes
+
+// Views
+app.get('/', viewRouter);
 
 // Products
 app.use('/api/v1/products', productRoutes);
