@@ -32,6 +32,10 @@ const productSchema = new mongoose.Schema(
         message: 'Discount price ({VALUE}) should be below the regular price',
       },
     },
+    brand: {
+      type: String,
+      default: 'LuckyPaws',
+    },
     type: {
       type: String,
       required: [true, 'Choose a product type.'],

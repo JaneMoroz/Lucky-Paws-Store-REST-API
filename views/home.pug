@@ -1,0 +1,315 @@
+doctype html
+html
+  head
+    block head
+      meta(charset='UTF-8')
+      meta(name='viewport' content='width=device-width, initial-scale=1.0')
+      title Lucky Paws | #{title}
+      link(rel='stylesheet' href='/css/style.css')
+      link(rel='shortcut icon' type='image/png' href='https://i.ibb.co/fXWnxrv/favicon.png')
+      link(rel='preconnect' href='https://fonts.googleapis.com')
+      link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin)
+      link(rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap')
+
+  body
+    // HEADER
+    header.header.header--index-page
+      div(class="header__inner")
+        // Tabs
+        .header-tabs.container
+          div(class="header-tabs__el header-tabs__el--hamburger")
+            button.btn.btn-icon
+              svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor")
+                path(stroke-linecap="round", stroke-linejoin="round", d="M4 6h16M4 12h16M4 18h16")
+          div(class="header-tabs__el header-tabs__el--logo")
+            a.btn(href="#")
+              img.logo(src="https://i.ibb.co/94gqm8h/logo.png", alt="Lucky paws logo")
+          div(class="header-tabs__el")
+            a.btn.btn-icon(href="#")
+              svg.h-6.w-6(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor")
+                path(stroke-linecap="round", stroke-linejoin="round", d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z")
+          div(class="header-tabs__el")
+            a.btn.btn-icon(href="#")
+              svg.h-6.w-6(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor")
+                path(stroke-linecap="round", stroke-linejoin="round", d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z")
+          div(class="header-tabs__el")
+            a.btn.btn-icon(href="register.html")
+              svg.h-6.w-6(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor")
+                path(stroke-linecap="round", stroke-linejoin="round", d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z")
+          div(class="header-tabs__el")
+            a.btn.btn-icon(href="#")
+              svg.h-6.w-6(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor")
+                path(stroke-linecap="round", stroke-linejoin="round", d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z")
+        // Navigation
+        nav.nav
+          div(class="nav__main container")
+            a.btn.btn-text.btn-text--big(href="#") New arrival
+            div(class="nav__item parent")
+              a.btn.btn-text.btn-text--big(href="#") Cat
+              div(class="nav__sub")
+                div(class="nav__sub-inner container")
+                  div(class="nav__sub-block")
+                    a.btn.btn-text.btn-text--sub(href="#") Bows &amp; Feeders
+                    a.btn.btn-text.btn-text--sub(href="#") Clothes
+                    a.btn.btn-text.btn-text--sub(href="#") Litter Boxes
+                  div(class="nav__sub-block")
+                    a.btn.btn-text.btn-text--sub(href="#") Furniture
+                    a.btn.btn-text.btn-text--sub(href="#") Scratching
+                    a.btn.btn-text.btn-text--sub(href="#") Brushes &amp; Combs
+                  div(class="nav__sub-block")
+                    a.btn.btn-text.btn-text--sub(href="#") Collars
+                    a.btn.btn-text.btn-text--sub(href="#") Harnesses
+                    a.btn.btn-text.btn-text--sub(href="#") Leashes
+                  div(class="nav__sub-block")
+                    a.btn.btn-text.btn-text--sub(href="#") Beds
+                    a.btn.btn-text.btn-text--sub(href="#") Toys
+                    a.btn.btn-text.btn-text--sub(href="#") Carriers
+            div(class="nav__item parent")
+              a.btn.btn-text.btn-text--big(href="#") Dog
+              div(class="nav__sub")
+                div(class="nav__sub-inner container")
+                  div(class="nav__sub-block")
+                    a.btn.btn-text.btn-text--sub(href="#") Bows &amp; Feeders
+                    a.btn.btn-text.btn-text--sub(href="#") Clothes
+                    a.btn.btn-text.btn-text--sub(href="#") Litter Boxes
+                  div(class="nav__sub-block")
+                    a.btn.btn-text.btn-text--sub(href="#") Interactive Toys
+                    a.btn.btn-text.btn-text--sub(href="#") Tough Toys
+                    a.btn.btn-text.btn-text--sub(href="#") Plush Toys
+                  div(class="nav__sub-block")
+                    a.btn.btn-text.btn-text--sub(href="#") Collars
+                    a.btn.btn-text.btn-text--sub(href="#") Harnesses
+                    a.btn.btn-text.btn-text--sub(href="#") Leashes
+                  div(class="nav__sub-block")
+                    a.btn.btn-text.btn-text--sub(href="#") Beds
+                    a.btn.btn-text.btn-text--sub(href="#") Furniture
+                    a.btn.btn-text.btn-text--sub(href="#") Carriers
+            a.btn.btn-text.btn-text--big(href="#") Gift cards
+            a.btn.btn-text.btn-text--big(href="#") About us
+      // Slideshow
+      .slideshow-container
+        // Slide 1
+        .slide.sliding
+          div(class="slide__img-box")
+            img(src="img/hero/hero-1.jpg", alt="slide 1")
+          div(class="slide__text-box")
+            h1.heading-primary
+              span.heading-primary--main  new! new! new! 
+              span.heading-primary--sub
+                | New toys from the famous japan brand “Pinky”
+            a.btn.btn-color.btn-color--secondary.btn--animated(href="#")
+              | View All
+              svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+                path(stroke-linecap="round", stroke-linejoin="round", d="M17 8l4 4m0 0l-4 4m4-4H3")
+        // Slide 2
+        .slide.sliding
+          div(class="slide__img-box")
+            img(src="/img/hero/hero-2.jpg", alt="slide 2")
+          div(class="slide__text-box")
+            h1.heading-primary
+              span.heading-primary--main  new! new! new! 
+              span.heading-primary--sub
+                | New toys from the famous japan brand “Pinky”
+            a.btn.btn-color.btn-color--secondary.btn--animated(href="#")
+              | View All
+              svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+                path(stroke-linecap="round", stroke-linejoin="round", d="M17 8l4 4m0 0l-4 4m4-4H3")
+        // Slide 3
+        .slide.sliding
+          div(class="slide__img-box")
+            img(src="/img/hero/hero-3.jpg", alt="slide 3")
+          div(class="slide__text-box")
+            h1.heading-primary
+              span.heading-primary--main  new! new! new! 
+              span.heading-primary--sub
+                | New toys from the famous japan brand “Pinky”
+            a.btn.btn-color.btn-color--secondary.btn--animated(href="#")
+              | View All
+              svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+                path(stroke-linecap="round", stroke-linejoin="round", d="M17 8l4 4m0 0l-4 4m4-4H3")
+        // Next and previous buttons
+        a(class="btn btn-icon btn-icon--left-arrow slideshow-container__prev", onclick="plusSlides(-1)")
+          svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+            path(stroke-linecap="round", stroke-linejoin="round", d="M15 19l-7-7 7-7")
+        a(class="btn btn-icon btn-icon--right-arrow slideshow-container__next", onclick="plusSlides(1)")
+          svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+            path(stroke-linecap="round", stroke-linejoin="round", d="M9 5l7 7-7 7")
+        // Slides Carousel Dotes
+        .dots
+          span.dot(onclick="currentSlide(1)")
+          span.dot(onclick="currentSlide(2)")
+          span.dot(onclick="currentSlide(3)")
+
+    main(class='container')
+      div(class='main__inner')
+        // Stories
+        .stories-section
+          // Story 1
+          .story
+            div(class="story__img-box")
+              img(src="/img/stories_round/story-1.jpg", alt="Story 1")
+            div(class="story__text-box")
+              h2.heading-secondary New
+          // Story 2
+          .story
+            div(class="story__img-box")
+              img(src="/img/stories_round/story-2.jpg", alt="Story 2")
+            div(class="story__text-box")
+              h2.heading-secondary Best selling
+          // Story 3
+          .story
+            div(class="story__img-box")
+              img(src="/img/stories_round/story-3.jpg", alt="Story 3")
+            div(class="story__text-box")
+              h2.heading-secondary Sale
+          // Story 4
+          .story
+            div(class="story__img-box")
+              img(src="/img/stories_round/story-4.jpg", alt="Story 4")
+            div(class="story__text-box")
+              h2.heading-secondary Pinky
+          // Story 5
+          .story
+            div(class="story__img-box")
+              img(src="/img/stories_round/story-5.jpg", alt="Story 5")
+            div(class="story__text-box")
+              h2.heading-secondary From Japan
+          // Story 1
+          .story
+            div(class="story__img-box")
+              img(src="/img/stories_round/story-6.jpg", alt="Story 6")
+            div(class="story__text-box")
+              h2.heading-secondary Chew Chew
+          // Story 6
+          .story
+            div(class="story__img-box")
+              img(src="/img/stories_round/story-7.jpg", alt="Story 7")
+            div(class="story__text-box")
+              h2.heading-secondary Stream
+        // New Arrivals
+        .products-section
+          .section-heading.section-heading--top
+            a.btn.btn-text.btn-text--huge(href="#") New Arrivals
+            div(class="section-heading__btns")
+              button.btn.btn-icon.btn-icon--left-arrow
+                svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+                  path(stroke-linecap="round", stroke-linejoin="round", d="M7 16l-4-4m0 0l4-4m-4 4h18")
+              button.btn.btn-icon.btn-icon--right-arrow
+                svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+                  path(stroke-linecap="round", stroke-linejoin="round", d="M17 8l4 4m0 0l-4 4m4-4H3")
+          // Products Display
+          .products-display.products-display--horizontal
+            each product in newArrivals
+              .product.product--normal.product--vertical
+                div(class="product__img-box")
+                  img(src=`${product.primaryImage}`, alt=`${product.name}`)
+                  span(class="product__label product__label--new") New
+                div(class="product__text-box")
+                  span(class="product__category-label")
+                    a.btn.btn-text.btn-text--sub-small(href="#")=product.type 
+                  a(class="btn btn-text btn-text--normal btn btn-text btn-text--normal heading-tertiary product__name")=product.name
+                  div(class="product__prices")
+                    span(class="product__prices--current")=`$${product.price}`
+        // Articles
+        .articles-section
+          .section-heading.section-heading--side
+            a.btn.btn-text.btn-text--huge(href="#") Articles
+            div(class="section-heading__btns")
+              button.btn.btn-icon.btn-icon--left-arrow
+                svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+                  path(stroke-linecap="round", stroke-linejoin="round", d="M7 16l-4-4m0 0l4-4m-4 4h18")
+              button.btn.btn-icon.btn-icon--right-arrow
+                svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+                  path(stroke-linecap="round", stroke-linejoin="round", d="M17 8l4 4m0 0l-4 4m4-4H3")
+          ul(class="articles-section__list")
+            li.article
+              div(class="article__img-box")
+                img(src="/img/articles/article-1.jpg", alt="Article Image")
+                div(class="article__text-box")
+                  h1.heading-primary--main
+                    a.btn.btn-text(href="#") How to Trim Your Dog’s Nails Safely
+                  p(class="article__paragraph")
+                    | Nail trimming is an essential part of dog grooming, and trim nails
+                    | are one clear sign of your dog’s good health and hygiene.
+                    | Professional groomers will perform the task for squeamish owners,
+                    | but dog nail trimming is a simple procedure if done correctly.
+        // Sale
+        .products-section
+          .section-heading.section-heading--top
+            a.btn.btn-text.btn-text--huge(href="#") SALE is on - Up to 50% off!
+            div(class="section-heading__btns")
+              button.btn.btn-icon.btn-icon--left-arrow
+                svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+                  path(stroke-linecap="round", stroke-linejoin="round", d="M7 16l-4-4m0 0l4-4m-4 4h18")
+              button.btn.btn-icon.btn-icon--right-arrow
+                svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+                  path(stroke-linecap="round", stroke-linejoin="round", d="M17 8l4 4m0 0l-4 4m4-4H3")
+          // Products Display
+          .products-display.products-display--horizontal
+            each product in onSale
+              .product.product--normal.product--vertical
+                div(class="product__img-box")
+                  img(src=`${product.primaryImage}`, alt=`${product.name}`)
+                  span(class="product__label product__label--sale") Sale
+                div(class="product__text-box")
+                  span(class="product__category-label")
+                    a.btn.btn-text.btn-text--sub-small(href="#")=product.type 
+                  a(class="btn btn-text btn-text--normal btn btn-text btn-text--normal heading-tertiary product__name")=product.name
+                  div(class="product__prices")
+                    span(class="product__prices--prev")=`$${product.price}`
+                    span(class="product__prices--current")=`$${(product.price-product.priceDiscount).toFixed(2)}`
+        // Brand 1
+        .promo-section.promo-section--left
+          // Brand
+          div(class="promo-section__brand-box")
+            img(src="/img//products/collection-0-1.jpg", alt="Brand Image")
+            div(class="promo-section__text")
+              span Butchers&apos;s
+              a.btn.btn-color.btn-color--primary(href="#")
+                | Shop Now
+                svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+                  path(stroke-linecap="round", stroke-linejoin="round", d="M17 8l4 4m0 0l-4 4m4-4H3")
+          // Products
+          .products-display.products-display--vertical
+            each product in collection1
+              .product.product--small.product--horizontal
+                div(class="product__img-box")
+                  img(src=`${product.primaryImage}`, alt=`${product.name}`)
+                div(class="product__text-box")
+                  span(class="product__category-label")=product.type 
+                  h3(class="btn btn-text btn-text--normal heading-tertiary product__name")=product.name
+                  div(class="product__prices")
+                    if product.priceDiscount
+                      span(class="product__prices--prev")=`$${product.price}`
+                      span(class="product__prices--current")=`$${(product.price-product.priceDiscount).toFixed(2)}`
+                    else 
+                      span(class="product__prices--current")=`$${product.price}`
+        // Brand 2
+        .promo-section.promo-section--right
+          // Brand
+          div(class="promo-section__brand-box")
+            img(src="/img//products/collection-0-2.jpg", alt="Brand Image")
+            div(class="promo-section__text")
+              span Diva
+              a.btn.btn-color.btn-color--primary(href="#")
+                | Shop Now
+                svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+                  path(stroke-linecap="round", stroke-linejoin="round", d="M17 8l4 4m0 0l-4 4m4-4H3")
+          // Products
+          .products-display.products-display--vertical
+            each product in collection2
+              .product.product--small.product--horizontal
+                div(class="product__img-box")
+                  img(src=`${product.primaryImage}`, alt=`${product.name}`)
+                div(class="product__text-box")
+                  span(class="product__category-label")=product.type 
+                  h3(class="btn btn-text btn-text--normal heading-tertiary product__name")=product.name
+                  div(class="product__prices")
+                    if product.priceDiscount
+                      span(class="product__prices--prev")=`$${product.price}`
+                      span(class="product__prices--current")=`$${(product.price-product.priceDiscount).toFixed(2)}`
+                    else 
+                      span(class="product__prices--current")=`$${product.price}`
+
+    // FOOTER
+    include _footer
