@@ -55,3 +55,20 @@ exports.getNewArrivals = catchAsync(async (req, res, next) => {
     collection2,
   });
 });
+
+exports.getProduct = catchAsync(async (req, res, next) => {
+  console.log('we here');
+  // 1. Get Data
+  console.log(req.params.slug);
+  const product = await Product.findOne({ slug: req.params.slug }).populate({
+    path: 'reviews',
+    fields: 'review rating user',
+  });
+  console.log(product);
+  // 2. Build Template
+  // 3. Render Template Using Data
+  res.status(200).render('product', {
+    title: 'Home',
+    product,
+  });
+});

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const slugify = require('slugify');
 
 ////////////////////////////////////////////////////////////////
 // Product Schema
@@ -18,6 +19,7 @@ const productSchema = new mongoose.Schema(
         'A product name must have more or equal than 5 characters ',
       ],
     },
+    slug: String,
     price: {
       type: Number,
       required: [true, 'A product must have a price'],
@@ -97,6 +99,13 @@ productSchema.virtual('reviews', {
   ref: 'Review',
   foreignField: 'product',
   localField: '_id',
+});
+
+// Create Slug
+// Document Middleware: runs before .save() and .create
+productSchema.pre('save', function (next) {
+  this.slug = slugify(this.name, { lower: true });
+  next();
 });
 
 const Product = mongoose.model('Product', productSchema);

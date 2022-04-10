@@ -13,7 +13,7 @@ html
 
   body
     // HEADER
-    header.header.header--index-page
+    header.header.header--home-page
       div(class="header__inner")
         // Tabs
         .header-tabs.container
@@ -143,7 +143,7 @@ html
     main(class='container')
       div(class='main__inner')
         // Stories
-        .stories-section
+        section(class="stories-section")
           // Story 1
           .story
             div(class="story__img-box")
@@ -187,7 +187,7 @@ html
             div(class="story__text-box")
               h2.heading-secondary Stream
         // New Arrivals
-        .products-section
+        section(class="products-section")
           .section-heading.section-heading--top
             a.btn.btn-text.btn-text--huge(href="#") New Arrivals
             div(class="section-heading__btns")
@@ -207,11 +207,15 @@ html
                 div(class="product__text-box")
                   span(class="product__category-label")
                     a.btn.btn-text.btn-text--sub-small(href="#")=product.type 
-                  a(class="btn btn-text btn-text--normal btn btn-text btn-text--normal heading-tertiary product__name")=product.name
+                  a(href=`/product/${product.slug}` class="btn btn-text btn-text--normal btn btn-text btn-text--normal heading-tertiary product__name")=product.name
                   div(class="product__prices")
-                    span(class="product__prices--current")=`$${product.price}`
+                    if product.priceDiscount
+                      span(class="pdp__prices--prev")=`$${product.price}`
+                      span(class="pdp__prices--current")=`$${(product.price-product.priceDiscount).toFixed(2)}`
+                    else 
+                      span(class="pdp__prices--current")=`$${product.price}`
         // Articles
-        .articles-section
+        section(class="articles-section")
           .section-heading.section-heading--side
             a.btn.btn-text.btn-text--huge(href="#") Articles
             div(class="section-heading__btns")
@@ -234,7 +238,7 @@ html
                     | Professional groomers will perform the task for squeamish owners,
                     | but dog nail trimming is a simple procedure if done correctly.
         // Sale
-        .products-section
+        section(class="products-section")
           .section-heading.section-heading--top
             a.btn.btn-text.btn-text--huge(href="#") SALE is on - Up to 50% off!
             div(class="section-heading__btns")
@@ -254,12 +258,12 @@ html
                 div(class="product__text-box")
                   span(class="product__category-label")
                     a.btn.btn-text.btn-text--sub-small(href="#")=product.type 
-                  a(class="btn btn-text btn-text--normal btn btn-text btn-text--normal heading-tertiary product__name")=product.name
+                  a(href=`/product/${product.slug}` class="btn btn-text btn-text--normal btn btn-text btn-text--normal heading-tertiary product__name")=product.name
                   div(class="product__prices")
                     span(class="product__prices--prev")=`$${product.price}`
                     span(class="product__prices--current")=`$${(product.price-product.priceDiscount).toFixed(2)}`
         // Brand 1
-        .promo-section.promo-section--left
+        section(class="promo-section promo-section--left")
           // Brand
           div(class="promo-section__brand-box")
             img(src="/img//products/collection-0-1.jpg", alt="Brand Image")
@@ -277,7 +281,7 @@ html
                   img(src=`${product.primaryImage}`, alt=`${product.name}`)
                 div(class="product__text-box")
                   span(class="product__category-label")=product.type 
-                  h3(class="btn btn-text btn-text--normal heading-tertiary product__name")=product.name
+                  a(href=`/product/${product.slug}` class="btn btn-text btn-text--normal heading-tertiary product__name")=product.name
                   div(class="product__prices")
                     if product.priceDiscount
                       span(class="product__prices--prev")=`$${product.price}`
@@ -285,7 +289,7 @@ html
                     else 
                       span(class="product__prices--current")=`$${product.price}`
         // Brand 2
-        .promo-section.promo-section--right
+        section(class="promo-section promo-section--right")
           // Brand
           div(class="promo-section__brand-box")
             img(src="/img//products/collection-0-2.jpg", alt="Brand Image")
@@ -303,7 +307,7 @@ html
                   img(src=`${product.primaryImage}`, alt=`${product.name}`)
                 div(class="product__text-box")
                   span(class="product__category-label")=product.type 
-                  h3(class="btn btn-text btn-text--normal heading-tertiary product__name")=product.name
+                  a(href=`/product/${product.slug}` class="btn btn-text btn-text--normal heading-tertiary product__name")=product.name
                   div(class="product__prices")
                     if product.priceDiscount
                       span(class="product__prices--prev")=`$${product.price}`

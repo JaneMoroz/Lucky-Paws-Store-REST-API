@@ -36,7 +36,7 @@ app.use(express.json());
 // Routes
 
 // Views
-app.get('/', viewRouter);
+app.use('/', viewRouter);
 
 // Products
 app.use('/api/v1/products', productRoutes);
