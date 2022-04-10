@@ -7,8 +7,8 @@ block content
       div(class="pdp__img--primary")
         img(src=`${product.primaryImage}`, alt="Product Image")
       div(class="pdp__img--additional")
-        each img in product.otherImages
-          img(src=`${img}`, alt="Product Image")
+        each img, i in product.otherImages
+          img(src=`${img}`, alt=`${product.name} Photo ${i + 1}`)
     div(class="pdp__text-box")
       div(class="pdp__text-box-row")
         span(class="pdp__category")
