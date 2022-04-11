@@ -516,10 +516,13 @@ function hmrAcceptRun(bundle, id) {
 },{}],"f2QDv":[function(require,module,exports) {
 var _webImmediateJs = require("core-js/modules/web.immediate.js");
 var _login = require("./login");
+var _updateSettings = require("./updateSettings");
 var _runtime = require("regenerator-runtime/runtime");
 // Dom elements
 const loginForm = document.querySelector('.form--login');
 const logOutBtn = document.querySelector('.account__nav-el--logout');
+const userDataForm = document.querySelector('.form-user-data');
+const userPasswordForm = document.querySelector('.form-user-password');
 // Login
 if (loginForm) loginForm.addEventListener('submit', (e)=>{
     e.preventDefault();
@@ -529,8 +532,37 @@ if (loginForm) loginForm.addEventListener('submit', (e)=>{
 });
 // Log out
 if (logOutBtn) logOutBtn.addEventListener('click', _login.logout);
+// Change settings
+if (userDataForm) userDataForm.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    document.querySelector('.btn--save-settings').textContent = 'Updating...';
+    const form = new FormData();
+    form.append('name', document.getElementById('name').value);
+    form.append('email', document.getElementById('email').value);
+    form.append('photo', document.getElementById('photo').files[0]);
+    await _updateSettings.updateSettings(form, 'data');
+    document.querySelector('.btn--save-settings').textContent = 'Save settings';
+    location.reload();
+});
+// Change password
+if (userPasswordForm) userPasswordForm.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    document.querySelector('.btn--save-password').textContent = 'Updating...';
+    const passwordCurrent = document.getElementById('password-current').value;
+    const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('password-confirm').value;
+    await _updateSettings.updateSettings({
+        passwordCurrent,
+        password,
+        passwordConfirm
+    }, 'password');
+    document.querySelector('.btn--save-password').textContent = 'Save password';
+    document.getElementById('password-current').value = '';
+    document.getElementById('password').value = '';
+    document.getElementById('password-confirm').value = '';
+});
 
-},{"core-js/modules/web.immediate.js":"49tUX","./login":"7yHem","regenerator-runtime/runtime":"dXNgZ"}],"49tUX":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"49tUX","./login":"7yHem","regenerator-runtime/runtime":"dXNgZ","./updateSettings":"l3cGY"}],"49tUX":[function(require,module,exports) {
 var $ = require('../internals/export');
 var global = require('../internals/global');
 var task = require('../internals/task');
@@ -3748,6 +3780,27 @@ try {
     else Function("r", "regeneratorRuntime = r")(runtime);
 }
 
-},{}]},["9VNw8","f2QDv"], "f2QDv", "parcelRequirec556")
+},{}],"l3cGY":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "updateSettings", ()=>updateSettings
+);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+const updateSettings = async (data, type)=>{
+    try {
+        const url = type === 'password' ? 'http://127.0.0.1:3000/api/v1/users/updateMyPassword' : 'http://127.0.0.1:3000/api/v1/users/updateMe';
+        const res = await _axiosDefault.default({
+            method: 'PATCH',
+            url,
+            data
+        });
+        if (res.data.status === 'success') console.log('Data is updated');
+    } catch (err) {
+        console.log('Smth went wrong');
+    }
+};
+
+},{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["9VNw8","f2QDv"], "f2QDv", "parcelRequirec556")
 
 //# sourceMappingURL=index.js.map

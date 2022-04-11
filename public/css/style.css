@@ -466,6 +466,20 @@ body {
     width: 50rem;
   }
 }
+.form__upload {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.form__upload + label {
+  display: inline-block;
+  font-weight: 500;
+  padding: 3px;
+  cursor: pointer;
+}
 .form__photo-upload {
   display: flex;
   align-items: center;
