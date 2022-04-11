@@ -54,6 +54,17 @@ exports.login = catchAsync(async (req, res, next) => {
 });
 
 ////////////////////////////////////////////////////////////////
+// Logging out middleware
+
+exports.logout = (req, res) => {
+  res.cookie('jwt', 'loggedout', {
+    expires: new Date(Date.now() + 10000),
+    httpOnly: true,
+  });
+  res.status(200).json({ status: 'success' });
+};
+
+////////////////////////////////////////////////////////////////
 // Authentication
 exports.protect = catchAsync(async (req, res, next) => {
   // 1. Get the token and check if it exists
@@ -63,6 +74,8 @@ exports.protect = catchAsync(async (req, res, next) => {
     req.headers.authorization.startsWith('Bearer')
   ) {
     token = req.headers.authorization.split(' ')[1];
+  } else if (req.cookies.jwt) {
+    token = req.cookies.jwt;
   }
 
   if (!token) {
@@ -91,8 +104,41 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // Grant access
   req.user = currentUser; // pass user in order to use it later
+  res.locals.user = currentUser;
   next();
 });
+
+////////////////////////////////////////////////////////////////
+// LogedIn middleware, only for rendered pages, no errors
+exports.isLoggedIn = async (req, res, next) => {
+  if (req.cookies.jwt) {
+    try {
+      // 1. Verify token
+      const decoded = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRET
+      );
+
+      // 2. Check if the user still exists
+      const currentUser = await User.findById(decoded.id);
+      if (!currentUser) {
+        return next();
+      }
+
+      // 3. Check if the user changed password after the token has been issued
+      if (currentUser.changedPasswordAfter(decoded.iat)) {
+        return next();
+      }
+
+      // There is a logged in user
+      res.locals.user = currentUser;
+      return next();
+    } catch (err) {
+      return next();
+    }
+  }
+  next();
+};
 
 ////////////////////////////////////////////////////////////////
 // Authorization

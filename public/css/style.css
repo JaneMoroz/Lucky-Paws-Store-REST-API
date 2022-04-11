@@ -206,7 +206,9 @@ body {
   color: #ffffff;
   font-weight: 400;
 }
-
+.btn-text--active::after {
+  transform: scaleX(1);
+}
 .btn-color {
   font-size: 1.4rem;
   font-weight: 500;
@@ -474,6 +476,7 @@ body {
   width: 7.5rem;
   border-radius: 50%;
   margin-right: 2rem;
+  object-fit: cover;
 }
 .form__product-photo {
   height: 7.5rem;
@@ -482,6 +485,13 @@ body {
 }
 .form__stars svg {
   fill: transparent !important;
+}
+.form-user-data {
+  margin-bottom: 2.4rem;
+}
+.form-user-password {
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(113, 113, 113, 0.75);
 }
 
 .story {

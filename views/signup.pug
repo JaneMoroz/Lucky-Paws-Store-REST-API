@@ -1,0 +1,21 @@
+extends base 
+
+block content 
+  div(class="form__outer")
+    form.form.form--big(action="submit")
+      h1(class="form__title heading-primary--main") Sign up
+      div(class="form__group")
+        input#name(type="text", class="form__input", placeholder="Name", required)
+      div(class="form__group")
+        input#email(type="email", class="form__input", placeholder="Email", required)
+      div(class="form__group")
+        input#password(type="password", class="form__input", placeholder="Password", required, minlength='8')
+      div(class="form__group")
+        input#confirmPassword(type="password", class="form__input", placeholder="Confirm Password", required, minlength='8')
+      div(class="form__group")
+        a.btn.btn-color.btn-color--mixed
+          | Sign Up
+          svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2")
+            path(stroke-linecap="round", stroke-linejoin="round", d="M17 8l4 4m0 0l-4 4m4-4H3")
+    a.btn.btn-text.btn-text--sub(href='/login')
+      | Want to log in?

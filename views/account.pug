@@ -1,0 +1,66 @@
+extends base 
+include _icons
+
+mixin navItem(link, text, icon, active)
+  li(class=`account__nav-el ${icon === "logout" ? 'account__nav-el--logout' : ''}`)
+    +icons(icon)
+    a(class=`btn btn-text btn-text--normal ${active ? 'btn-text--active' : ''} `, href=`${link}`) #{text}
+
+block content
+  .account
+    // Navigation
+    nav(class="account__nav")
+      // Main Navigation
+      div(class="account__nav-user")
+        ul(class="account__nav-list")
+          // Settings
+          +navItem('#', 'Settings', 'gear', true)
+          // My Orders
+          +navItem('#', 'My Orders', 'cart', false)
+          // My reviews
+          +navItem('#', 'My Reviews', 'star', false)
+          // Billing
+          +navItem('#', 'Billing', 'card', false)
+          // Log out
+          +navItem('#', 'Log Out', 'logout', false)
+      // Admin Navigation
+      div(class="account__nav-admin")
+        span(class="account__nav-admin-badge")
+          +icons("key")
+          | Admin
+        ul(class="account__nav-list")
+          // Manage Products
+          +navItem('#', 'Manage Products', 'box', false)
+          // Manage Users
+          +navItem('#', 'Manage Users', 'users', false)
+          // My reviews
+          +navItem('#', 'Manage Reviews', 'star', false)
+          // Manage Orders
+          +navItem('#', 'Manage Orders', 'money', false)
+    div(class="account__container")
+      // Account Details
+      // Settings
+      div(class="account__details")
+        form.form.form--big.form-user-data
+          h1(class="form__title heading-primary--main") Your account settings
+          div(class="form__group")
+            input#name(type="text", class="form__input", value=`${user.name}`, required)
+          div(class="form__group")
+            input#email(type="email", class="form__input", value=`${user.email}`, required)
+          div(class="form__group form__photo-upload")
+            img(src=`${user.photo}`, alt=`${user.name}`, class="form__user-photo")
+            a.btn.btn-text(href="#") Choose new photo
+          div(class="form__group")
+            a.btn.btn-color.btn-color--mixed  Save Settings 
+      // Password
+      div(class="account__details")
+        form.form.form--big.form-user-password
+          h1(class="form__title heading-primary--main") Password Change
+          div(class="form__group")
+            input#currentPassword(type="password", class="form__input", placeholder="Current Password", required,minlength='8')
+          div(class="form__group")
+            input#password(type="password", class="form__input", placeholder="New Password", required, minlength='8')
+          div(class="form__group")
+            input#confirmPassword(type="password", class="form__input", placeholder="Confirm New Password", required,minlength='8')
+          div(class="form__group")
+            a.btn.btn-color.btn-color--mixed  Save Password 

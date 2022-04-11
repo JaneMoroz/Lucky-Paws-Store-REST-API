@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -31,6 +32,18 @@ if (process.env.NODE_ENV === 'development') {
 
 // Express middleware: body parser, reading data from body into rq.body
 app.use(express.json());
+
+// Express middleware: body parser, reading data from body into rq.body
+app.use(express.json({ limit: '10kb' }));
+// To parse data from cookies
+app.use(cookieParser());
+
+// Test middleware
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  console.log(req.cookies);
+  next();
+});
 
 ////////////////////////////////////////////////////////////////
 // Routes

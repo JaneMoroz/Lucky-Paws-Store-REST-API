@@ -1,3 +1,5 @@
+include _icons
+
 header.header
   div(class="header__inner")
     // Tabs
@@ -11,20 +13,16 @@ header.header
           img.logo(src="https://i.ibb.co/94gqm8h/logo.png", alt="Lucky paws logo")
       div(class="header-tabs__el")
         a.btn.btn-icon(href="#")
-          svg.h-6.w-6(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor")
-            path(stroke-linecap="round", stroke-linejoin="round", d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z")
+          +icons("search")
       div(class="header-tabs__el")
         a.btn.btn-icon(href="#")
-          svg.h-6.w-6(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor")
-            path(stroke-linecap="round", stroke-linejoin="round", d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z")
+          +icons("heart")
       div(class="header-tabs__el")
-        a.btn.btn-icon(href="register.html")
-          svg.h-6.w-6(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor")
-            path(stroke-linecap="round", stroke-linejoin="round", d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z")
+        a.btn.btn-icon(href=`${user ? '/my-account' : '/login'}`)
+          +icons("account")
       div(class="header-tabs__el")
         a.btn.btn-icon(href="#")
-          svg.h-6.w-6(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor")
-            path(stroke-linecap="round", stroke-linejoin="round", d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z")
+          +icons("cart")
     // Navigation
     nav.nav
       div(class="nav__main container")
