@@ -1,0 +1,38 @@
+include _icons
+
+mixin navItem(link, text, icon, active)
+  li(class=`account__nav-el account__nav-el--${icon}`)
+    +icons(icon)
+    a(class=`btn btn-text btn-text--normal ${active ? 'btn-text--active' : ''} `, href=`${link}`) #{text}
+
+mixin accountNavigation(navElActive)
+  // Navigation
+  nav(class="account__nav")
+    // Main Navigation
+    div(class="account__nav-user")
+      ul(class="account__nav-list")
+        // Settings
+        +navItem('/my-account', 'Settings', 'gear', navElActive === "MySettings" ? true : false)
+        // My Orders
+        +navItem('/my-orders', 'My Orders', 'cart', navElActive === "MyOrders" ? true : false)
+        // My reviews
+        +navItem('#', 'My Reviews', 'star', navElActive === "MyReviews" ? true : false)
+        // Billing
+        +navItem('#', 'Billing', 'card', navElActive === "MyBilling" ? true : false)
+        // Log out
+        +navItem('#', 'Log Out', 'logout', false)
+    - if(user.role === 'admin')
+      // Admin Navigation
+      div(class="account__nav-admin")
+        span(class="account__nav-admin-badge")
+          +icons("key")
+          | Admin
+        ul(class="account__nav-list")
+          // Manage Products
+          +navItem('#', 'Manage Products', 'box', false)
+          // Manage Users
+          +navItem('#', 'Manage Users', 'users', false)
+          // My reviews
+          +navItem('#', 'Manage Reviews', 'star', false)
+          // Manage Orders
+          +navItem('#', 'Manage Orders', 'money', false)

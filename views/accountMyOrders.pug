@@ -1,0 +1,27 @@
+extends base 
+include _accountNav
+
+block content
+  .account
+    +accountNavigation("MyOrders")
+    div(class="account__container")
+      h1.list-title.heading-primary--main Your orders
+      ul.list
+        each order in orders
+          - let quantity = 0
+          - const date = order.created.toLocaleString('en-us', {day: 'numeric', month: 'long', year: 'numeric'})
+          - order.cart.products.forEach(product => {quantity+=product.quantity })
+          li.order
+            a(href=`/my-orders/${order._id}` class="btn btn-text btn-text--normal order__data")=date
+            ul(class="order__products-list")
+              each product in order.cart.products
+                li(class="order__product")=product.product.name
+            div(class=`order__status order__status--${order.isDelivered ? 'green' : 'red'}`)
+              span
+              | Delivered
+            div(class="order__details")
+              span(class="order__quantity")=`${quantity}pc`
+              span(class="order__total-price")=`$${order.totalPrice}`
+            div(class="order__customer")
+              span(class="order__customer-name")=order.user.name
+              span(class="order__customer-address")=`${order.shippingAddress.country}, ${order.shippingAddress.postalCode}, ${order.shippingAddress.city}, ${order.shippingAddress.address}`

@@ -13,5 +13,7 @@ router.get(
 router.get('/login', authController.isLoggedIn, viewController.getLoginForm);
 router.get('/signup', authController.isLoggedIn, viewController.getSignUpForm);
 router.get('/my-account', authController.protect, viewController.getAccount);
+router.get('/my-orders', authController.protect, viewController.getOrders);
+router.get('/my-orders/:id', authController.protect, viewController.getOrder);
 
 module.exports = router;

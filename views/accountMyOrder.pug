@@ -1,0 +1,36 @@
+extends base 
+include _accountNav
+
+block content
+  .account
+    +accountNavigation("MyOrders")
+    div(class="account__container")
+      .order
+        - const date = order.created.toLocaleString('en-us', {day: 'numeric', month: 'long', year: 'numeric'})  
+        h2(class="order__data heading-tertiary")=date
+        ul(class="order__products-list")
+          each product in order.cart.products
+            li(class="order__product")
+              span(class="order__product-details")
+                img(src=`${product.product.primaryImage}`, alt=`${product.product.name}`, class="order__product-img")
+                a.btn.btn-text--sub(href=`/product/${product.product.slug}`)=product.product.name
+              span(class="order__product-price")=`$${product.totalPrice}`
+        div(class="order__price")
+          span(class="order__price-name") Taxes:
+          span=`$${order.taxPrice}`
+          span(class="order__price-name") Shipping Price:
+          span=`$${order.shippingPrice}`
+          span(class="order__price-name order__price-total") Total:
+          span=`$${order.totalPrice}`
+        div(class="order__details")
+          div(class="order__customer")
+            span(class="order__customer-name")=order.user.name
+            span(class="order__customer-address")=`${order.shippingAddress.country}, ${order.shippingAddress.postalCode}, ${order.shippingAddress.city}, ${order.shippingAddress.address}`
+          div(class="order__statuses")
+            div(class=`order__status order__status--${order.isPaid ? 'green' : 'red'}`)
+              span
+              | Paid
+            div(class=`order__status order__status--${order.isDelivered ? 'green' : 'red'}`)
+              span
+              | Delivered
+        a(class="order__btn btn btn-color btn-color--mixed") Save

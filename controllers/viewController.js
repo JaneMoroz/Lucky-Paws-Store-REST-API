@@ -1,4 +1,5 @@
 const Product = require('./../models/productModel');
+const Order = require('./../models/orderModel');
 const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
@@ -64,7 +65,6 @@ exports.getProduct = catchAsync(async (req, res, next) => {
     path: 'reviews',
     fields: 'review rating user',
   });
-  console.log(product);
   // 2. Build Template
   // 3. Render Template Using Data
   res.status(200).render('product', {
@@ -86,7 +86,38 @@ exports.getSignUpForm = (req, res) => {
 };
 
 exports.getAccount = (req, res) => {
-  res.status(200).render('account', {
+  res.status(200).render('accountDetails', {
     title: 'Your account',
   });
 };
+
+exports.getOrders = catchAsync(async (req, res, next) => {
+  // Find orders by userId
+  const orders = await Order.find({ user: req.user.id }).populate({
+    path: 'cart',
+    fields: 'products',
+    path: 'user',
+  });
+
+  res.status(200).render('accountMyOrders', {
+    title: 'Your orders',
+    orders,
+  });
+});
+
+exports.getOrder = catchAsync(async (req, res, next) => {
+  console.log(req.params.id);
+  // Find order by id
+  const order = await Order.findById(req.params.id).populate({
+    path: 'cart',
+    fields: 'products',
+    path: 'user',
+  });
+
+  console.log(order);
+
+  res.status(200).render('accountMyOrder', {
+    title: 'Your order',
+    order,
+  });
+});

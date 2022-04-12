@@ -9,6 +9,18 @@ const router = express.Router();
 router.use(authController.protect);
 
 ////////////////////////////////////////////////////////////////
+// Customer Order Routes
+router
+  .route('/myOrders')
+  .get(orderController.getMe, orderController.getAllOrders);
+
+router
+  .route('/myOrders/:id')
+  .get(orderController.getMe, orderController.getOrder);
+
+router.route('/:cartId/').post(orderController.createOrder);
+
+////////////////////////////////////////////////////////////////
 // Admin/ Manager Order Routes
 router
   .route('/:id')
@@ -35,17 +47,5 @@ router
     authController.restrictTo('admin', 'manager'),
     orderController.updateOrderToDelivered
   );
-
-////////////////////////////////////////////////////////////////
-// Customer Order Routes
-router
-  .route('/myOrders')
-  .get(orderController.getMe, orderController.getAllOrders);
-
-router
-  .route('/myOrders/:id')
-  .get(orderController.getMe, orderController.getOrder);
-
-router.route('/:cartId/').post(orderController.createOrder);
 
 module.exports = router;

@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// Login
 export const login = async (email, password) => {
   try {
     const res = await axios({
@@ -23,6 +24,7 @@ export const login = async (email, password) => {
   }
 };
 
+// Logout
 export const logout = async () => {
   try {
     const res = await axios({

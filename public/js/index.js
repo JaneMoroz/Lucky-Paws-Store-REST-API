@@ -4,12 +4,15 @@ import { updateSettings } from './updateSettings';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
+/////////////////////////////////////////////////////////////////////
 // Dom elements
 const loginForm = document.querySelector('.form--login');
 const logOutBtn = document.querySelector('.account__nav-el--logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
+const getMyOrdersBtn = document.querySelector('.account__nav-el--cart');
 
+/////////////////////////////////////////////////////////////////////
 // Login
 if (loginForm) {
   loginForm.addEventListener('submit', (e) => {
@@ -23,6 +26,7 @@ if (loginForm) {
 // Log out
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
 
+/////////////////////////////////////////////////////////////////////
 // Change settings
 if (userDataForm) {
   userDataForm.addEventListener('submit', async (e) => {

@@ -5,6 +5,7 @@ const APIFeatures = require('./../utils/apiFeatures');
 // Get all
 exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
+    console.log(req.params);
     let filter = {};
     if (req.params.productId) filter = { product: req.params.productId };
     if (req.params.userId) filter = { user: req.params.userId };
@@ -35,8 +36,6 @@ exports.getOne = (Model, popOptions) =>
     if (!doc) {
       return next(new AppError('No document found with that ID', 404));
     }
-    console.log(req.params.userId);
-    console.log(doc.user);
 
     if (req.params.userId && String(req.params.userId) !== String(doc.user)) {
       return next(
