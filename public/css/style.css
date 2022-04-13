@@ -1426,6 +1426,7 @@ body {
   align-items: center;
   -moz-column-gap: 1.4rem;
   column-gap: 1.4rem;
+  padding: 1.2rem 0;
 }
 .pdp__options-name {
   text-transform: uppercase;

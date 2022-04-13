@@ -195,3 +195,9 @@ exports.getAllOrders = catchAsync(async (req, res, next) => {
     allOrders: true,
   });
 });
+
+exports.getAddNewProductForm = catchAsync(async (req, res, next) => {
+  res.status(200).render('accountAddNewProduct', {
+    title: 'Add New Product',
+  });
+});

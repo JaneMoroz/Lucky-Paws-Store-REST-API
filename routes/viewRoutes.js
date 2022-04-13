@@ -34,6 +34,7 @@ router.get(
   authController.protect,
   viewController.getAllProducts
 );
+
 router.get(
   '/manage-users/',
   authController.protect,
@@ -48,6 +49,12 @@ router.get(
   '/manage-orders/',
   authController.protect,
   viewController.getAllOrders
+);
+
+router.get(
+  '/manage-products/add',
+  authController.protect,
+  viewController.getAddNewProductForm
 );
 
 module.exports = router;

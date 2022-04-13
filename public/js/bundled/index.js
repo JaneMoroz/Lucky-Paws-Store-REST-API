@@ -517,6 +517,7 @@ function hmrAcceptRun(bundle, id) {
 var _webImmediateJs = require("core-js/modules/web.immediate.js");
 var _login = require("./login");
 var _updateSettings = require("./updateSettings");
+var _newProduct = require("./newProduct");
 var _runtime = require("regenerator-runtime/runtime");
 /////////////////////////////////////////////////////////////////////
 // Dom elements
@@ -524,7 +525,7 @@ const loginForm = document.querySelector('.form--login');
 const logOutBtn = document.querySelector('.account__nav-el--logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
-const getMyOrdersBtn = document.querySelector('.account__nav-el--cart');
+const addNewProductForm = document.querySelector('.form--add-product');
 /////////////////////////////////////////////////////////////////////
 // Login
 if (loginForm) loginForm.addEventListener('submit', (e)=>{
@@ -565,8 +566,45 @@ if (userPasswordForm) userPasswordForm.addEventListener('submit', async (e)=>{
     document.getElementById('password').value = '';
     document.getElementById('password-confirm').value = '';
 });
+/////////////////////////////////////////////////////////////////////
+// Product/ Add New Product
+if (addNewProductForm) {
+    console.log('form is resdy');
+    addNewProductForm.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        document.querySelector('.btn--add-product').textContent = 'Adding...';
+        const data = {};
+        data.name = document.getElementById('productName').value;
+        data.type = document.getElementById('type').value;
+        data.animal = document.getElementById('animal').value;
+        data.brand = document.getElementById('brand').value;
+        data.price = +document.getElementById('price').value;
+        data.countInStock = +document.getElementById('countInStock').value;
+        data.features = [
+            document.getElementById('feature1').value,
+            document.getElementById('feature2').value,
+            document.getElementById('feature3').value,
+            document.getElementById('feature4').value, 
+        ].filter((el)=>el !== ''
+        );
+        data.primaryImage = document.getElementById('primaryImg').value;
+        data.otherImages = [
+            document.getElementById('otherImg1').value,
+            document.getElementById('otherImg2').value,
+            ,
+            document.getElementById('otherImg3').value, 
+        ].filter((el)=>el !== ''
+        );
+        const color = document.getElementById('colors').value.split(', ');
+        data.color = color.length === 0 ? [] : color;
+        const style = document.getElementById('styles').value.split(', ');
+        data.style = style.length === 0 ? [] : style;
+        console.log(data);
+        await _newProduct.addNewProduct(data);
+    });
+}
 
-},{"core-js/modules/web.immediate.js":"49tUX","./login":"7yHem","./updateSettings":"l3cGY","regenerator-runtime/runtime":"dXNgZ"}],"49tUX":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"49tUX","./login":"7yHem","./updateSettings":"l3cGY","regenerator-runtime/runtime":"dXNgZ","./newProduct":"4cDGZ"}],"49tUX":[function(require,module,exports) {
 var $ = require('../internals/export');
 var global = require('../internals/global');
 var task = require('../internals/task');
@@ -3805,6 +3843,31 @@ try {
     else Function("r", "regeneratorRuntime = r")(runtime);
 }
 
-},{}]},["9VNw8","f2QDv"], "f2QDv", "parcelRequirec556")
+},{}],"4cDGZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "addNewProduct", ()=>addNewProduct
+);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+const addNewProduct = async (data)=>{
+    try {
+        const res = await _axiosDefault.default({
+            method: 'POST',
+            url: '/api/v1/products/',
+            data
+        });
+        if (res.data.status === 'success') {
+            console.log('Product is created');
+            window.setTimeout(()=>{
+                location.assign('/manage-products');
+            }, 1500);
+        }
+    } catch (err) {
+        console.log('Smth went wrong!');
+    }
+};
+
+},{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["9VNw8","f2QDv"], "f2QDv", "parcelRequirec556")
 
 //# sourceMappingURL=index.js.map

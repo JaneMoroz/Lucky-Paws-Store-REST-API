@@ -42,10 +42,6 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Choose a product type.'],
     },
-    subType: {
-      type: String,
-      required: [true, 'Choose a product sub-type.'],
-    },
     animal: {
       type: [String],
       required: [true, 'Specify a pet: cat, dog, or etc'],
@@ -60,7 +56,7 @@ const productSchema = new mongoose.Schema(
     otherImages: [String],
     ratingsAverage: {
       type: Number,
-      default: 4.5,
+      default: 5,
       min: [1, 'Rating must be above 1.0'],
       max: [5, 'Rating must be below 5.0'],
       set: (val) => Math.round(val * 10) / 10,

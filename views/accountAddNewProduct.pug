@@ -1,0 +1,47 @@
+extends base 
+include _accountNav
+
+block content
+  .account
+    +accountNavigation("ManageProducts")
+    div(class="account__container")
+      div(class="account__details")
+        form.form.form--big.form--add-product
+          h1(class="form__title heading-primary--main") Add New Product
+          div(class="form__group")
+            input#productName(type="text", class="form__input", placeholder="Product Name", required)
+          div(class="form__group")
+            input#type(type="text", class="form__input", placeholder="Type", required)
+          div(class="form__group")
+            input#animal(type="text", class="form__input", placeholder="Animal", required)
+          div(class="form__group")
+            input#brand(type="text", class="form__input", placeholder="Brand")
+          div(class="form__group")
+            input#price(type="number", class="form__input", placeholder="Price", required)
+          div(class="form__group")
+            input#countInStock(type="number", class="form__input", placeholder="Count in Stock", required)
+          span Write colors, styles separated by coma:
+          div(class="form__group")
+            input#colors(type="text", class="form__input", placeholder="Colors")
+          div(class="form__group")
+            input#styles(type="text", class="form__input", placeholder="Styles")
+          span Features:
+          div(class="form__group")
+            textarea#feature1(rows="2", class="form__textarea form__textarea--small", placeholder="Feature 1")
+          div(class="form__group")
+            textarea#feature2(rows="2", class="form__textarea form__textarea--small", placeholder="Feature 2")
+          div(class="form__group")
+            textarea#feature3(rows="2", class="form__textarea form__textarea--small", placeholder="Feature 3")
+          div(class="form__group")
+            textarea#feature4(rows="2", class="form__textarea form__textarea--small", placeholder="Feature 4")
+          span Pictures:
+          div(class="form__group")
+            input#primaryImg(type="text", class="form__input", placeholder="Primary Image", required)
+          div(class="form__group")
+            input#otherImg1(type="text", class="form__input", placeholder="Other Image 1")
+          div(class="form__group")
+            input#otherImg2(type="text", class="form__input", placeholder="Other Image 2")
+          div(class="form__group")
+            input#otherImg3(type="text", class="form__input", placeholder="Other Image 3")
+          div(class="form__group")
+            button.btn.btn-color.btn-color--mixed.btn--add-product Add New Product
