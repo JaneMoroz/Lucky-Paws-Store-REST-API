@@ -7,10 +7,6 @@ const AppError = require('./../utils/appError');
 exports.addCartItem = catchAsync(async (req, res, next) => {
   // Get Cart Item
   let cartItem = { ...req.body };
-  // Calculate Cart Item properties
-  cartItem.totalPrice = cartItem.purchasePrice * cartItem.quantity;
-  cartItem.totalTax = cartItem.totalPrice * 0.2;
-  cartItem.priceWithTax = cartItem.totalPrice + cartItem.totalTax;
 
   // Find user's cart and add item to products, if doesnt exist => create new cart
   const userCart = await Cart.findOne({ user: req.user.id, ordered: false });

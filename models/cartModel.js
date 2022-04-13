@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Cart Item Schema
-const CartItemSchema = new mongoose.Schema(
+const cartItemSchema = new mongoose.Schema(
   {
     product: {
       type: mongoose.Schema.Types.ObjectId,
@@ -12,18 +12,7 @@ const CartItemSchema = new mongoose.Schema(
     color: String,
     quantity: Number,
     purchasePrice: {
-      type: Number,
-      default: 0,
-    },
-    totalPrice: {
-      type: Number,
-      default: 0,
-    },
-    priceWithTax: {
-      type: Number,
-      default: 0,
-    },
-    totalTax: {
+      required: true,
       type: Number,
       default: 0,
     },
@@ -34,14 +23,14 @@ const CartItemSchema = new mongoose.Schema(
   }
 );
 
-const CartItem = mongoose.model('CartItem', CartItemSchema);
+const CartItem = mongoose.model('CartItem', cartItemSchema);
 
 module.exports = CartItem;
 
 // Cart Schema
-const CartSchema = new mongoose.Schema(
+const cartSchema = new mongoose.Schema(
   {
-    products: [CartItemSchema],
+    products: [cartItemSchema],
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
@@ -50,6 +39,22 @@ const CartSchema = new mongoose.Schema(
     created: {
       type: Date,
       default: Date.now,
+    },
+    subtotal: {
+      type: Number,
+      default: 0,
+    },
+    taxes: {
+      type: Number,
+      default: 0,
+    },
+    shippingPrice: {
+      type: Number,
+      default: 0,
+    },
+    total: {
+      type: Number,
+      default: 0,
     },
     ordered: {
       type: Boolean,
@@ -63,7 +68,7 @@ const CartSchema = new mongoose.Schema(
 );
 
 // Populate product Middleware
-CartSchema.pre(/^find/, function (next) {
+cartSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'products.product',
     select: 'name primaryImage slug',
@@ -71,6 +76,20 @@ CartSchema.pre(/^find/, function (next) {
   next();
 });
 
-const Cart = mongoose.model('Cart', CartSchema);
+// Calculate subtotal, taxes, total
+cartSchema.pre('save', function (next) {
+  const cartItemsSubtotalArr = this.products.map(
+    (product) => product.quantity * product.purchasePrice
+  );
+  this.subtotal = cartItemsSubtotalArr.reduce((a, b) => a + b, 0).toFixed(2);
+  this.taxes = (this.subtotal * 0.1).toFixed(2);
+  const totalAfterTaxes = this.subtotal + this.taxes;
+  this.shippingPrice = totalAfterTaxes > 100 ? 0 : 20;
+  this.total = totalAfterTaxes + this.shippingPrice;
+
+  next();
+});
+
+const Cart = mongoose.model('Cart', cartSchema);
 
 module.exports = Cart;

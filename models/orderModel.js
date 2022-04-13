@@ -39,21 +39,6 @@ const OrderSchema = new mongoose.Schema(
       update_time: String,
       email_address: String,
     },
-    taxPrice: {
-      type: Number,
-      required: true,
-      default: 0.0,
-    },
-    shippingPrice: {
-      type: Number,
-      required: true,
-      default: 0.0,
-    },
-    totalPrice: {
-      type: Number,
-      required: true,
-      default: 0.0,
-    },
     isPaid: {
       type: Boolean,
       required: true,

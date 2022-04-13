@@ -28,29 +28,10 @@ exports.getOrder = factory.getOne(Order);
 exports.createOrder = catchAsync(async (req, res, next) => {
   // Get Cart Items
   const cart = await Cart.findById(req.params.cartId);
-  console.log(cart);
 
   if (!cart) {
     return next(new AppError('No cart found with that ID', 404));
   }
-
-  // Calculate total taxes
-  const taxPrice = cart.products.reduce(function (acc, obj) {
-    return acc + obj.totalTax;
-  }, 0);
-
-  console.log(taxPrice);
-
-  // Calculate total price before shipping
-  const totalPriceBeforeShipping = cart.products.reduce(function (acc, obj) {
-    return acc + obj.totalPrice;
-  }, 0);
-
-  console.log(totalPriceBeforeShipping);
-
-  // Calculate shipping costs and total price
-  const shippingPrice = totalPriceBeforeShipping > 200 ? 0 : 15;
-  const totalPrice = totalPriceBeforeShipping + shippingPrice;
 
   // Create order
   const order = await Order.create({
@@ -64,9 +45,6 @@ exports.createOrder = catchAsync(async (req, res, next) => {
     },
     paymentMethod: req.body.paymentMethod,
     paymentResult: req.body.paymentResult,
-    taxPrice: taxPrice,
-    shippingPrice: shippingPrice,
-    totalPrice: totalPrice,
   });
 
   // Mark cart as "ordered"
