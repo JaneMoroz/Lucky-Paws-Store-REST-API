@@ -1,11 +1,14 @@
 const Product = require('./../models/productModel');
 const Order = require('./../models/orderModel');
+const Review = require('./../models/reviewModel');
 const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const APIFeatures = require('./../utils/apiFeatures');
 
-exports.getNewArrivals = catchAsync(async (req, res, next) => {
+////////////////////////////////////////////////////////////////
+// Home Page/Product Page
+exports.getProducts = catchAsync(async (req, res, next) => {
   // 1. Get Data
   // New Arrivals
   const newProd = new APIFeatures(Product.find(), {
@@ -73,6 +76,8 @@ exports.getProduct = catchAsync(async (req, res, next) => {
   });
 });
 
+////////////////////////////////////////////////////////////////
+// Login/SignUp
 exports.getLoginForm = (req, res) => {
   res.status(200).render('login', {
     title: 'Log into your account',
@@ -85,6 +90,8 @@ exports.getSignUpForm = (req, res) => {
   });
 };
 
+////////////////////////////////////////////////////////////////
+// My account
 exports.getAccount = (req, res) => {
   res.status(200).render('accountDetails', {
     title: 'Your account',
@@ -93,11 +100,13 @@ exports.getAccount = (req, res) => {
 
 exports.getOrders = catchAsync(async (req, res, next) => {
   // Find orders by userId
-  const orders = await Order.find({ user: req.user.id }).populate({
+  const unsortedOrders = await Order.find({ user: req.user.id }).populate({
     path: 'cart',
     fields: 'products',
     path: 'user',
   });
+
+  const orders = unsortedOrders.sort((a, b) => b.created - a.created);
 
   res.status(200).render('accountMyOrders', {
     title: 'Your orders',
@@ -106,7 +115,6 @@ exports.getOrders = catchAsync(async (req, res, next) => {
 });
 
 exports.getOrder = catchAsync(async (req, res, next) => {
-  console.log(req.params.id);
   // Find order by id
   const order = await Order.findById(req.params.id).populate({
     path: 'cart',
@@ -114,10 +122,76 @@ exports.getOrder = catchAsync(async (req, res, next) => {
     path: 'user',
   });
 
-  console.log(order);
-
   res.status(200).render('accountMyOrder', {
     title: 'Your order',
     order,
+  });
+});
+
+exports.getReviews = catchAsync(async (req, res, next) => {
+  // Find orders by userId
+  const unsortedReviews = await Review.find({ user: req.user.id }).populate({
+    path: 'product',
+    fields: 'name primaryImage',
+  });
+
+  const reviews = unsortedReviews.sort((a, b) => b.createdAt - a.createdAt);
+
+  res.status(200).render('accountMyList', {
+    title: 'Your reviews',
+    reviews,
+    myReviews: true,
+  });
+});
+
+////////////////////////////////////////////////////////////////
+// Admin
+exports.getAllProducts = catchAsync(async (req, res, next) => {
+  const prod = new APIFeatures(Product.find(), {
+    sort: '-created',
+  }).sort();
+
+  let products = await prod.query;
+
+  res.status(200).render('accountMyList', {
+    title: 'List of Products',
+    allProducts: true,
+    products,
+  });
+});
+
+exports.getAllUsers = catchAsync(async (req, res, next) => {
+  const u = new APIFeatures(User.find(), {
+    sort: 'name',
+  }).sort();
+
+  let users = await u.query;
+
+  res.status(200).render('accountMyList', {
+    title: 'List of Users',
+    allUsers: true,
+    users,
+  });
+});
+
+exports.getAllReviews = catchAsync(async (req, res, next) => {
+  const unsortedReviews = await Review.find().populate({
+    path: 'product',
+    fields: 'name primaryImage',
+  });
+
+  const reviews = unsortedReviews.sort((a, b) => b.createdAt - a.createdAt);
+
+  res.status(200).render('accountMyList', {
+    title: 'List of Reviews',
+    allReviews: true,
+    reviews,
+  });
+});
+
+exports.getAllOrders = catchAsync(async (req, res, next) => {
+  res.status(200).render('accountMyList', {
+    title: 'List of Reviews',
+    allOrders: true,
   });
 });

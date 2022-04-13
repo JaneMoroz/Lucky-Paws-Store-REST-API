@@ -16,7 +16,7 @@ mixin accountNavigation(navElActive)
         // My Orders
         +navItem('/my-orders', 'My Orders', 'cart', navElActive === "MyOrders" ? true : false)
         // My reviews
-        +navItem('#', 'My Reviews', 'star', navElActive === "MyReviews" ? true : false)
+        +navItem('/my-reviews', 'My Reviews', 'star', navElActive === "MyReviews" ? true : false)
         // Billing
         +navItem('#', 'Billing', 'card', navElActive === "MyBilling" ? true : false)
         // Log out
@@ -29,10 +29,10 @@ mixin accountNavigation(navElActive)
           | Admin
         ul(class="account__nav-list")
           // Manage Products
-          +navItem('#', 'Manage Products', 'box', false)
+          +navItem('/manage-products', 'Manage Products', 'box',  navElActive === "ManageProducts" ? true : false)
           // Manage Users
-          +navItem('#', 'Manage Users', 'users', false)
+          +navItem('/manage-users', 'Manage Users', 'users',  navElActive === "ManageUsers" ? true : false)
           // My reviews
-          +navItem('#', 'Manage Reviews', 'star', false)
+          +navItem('/manage-reviews', 'Manage Reviews', 'star',  navElActive === "ManageReviews" ? true : false)
           // Manage Orders
-          +navItem('#', 'Manage Orders', 'money', false)
+          +navItem('/manage-orders', 'Manage Orders', 'money',  navElActive === "ManageOrders" ? true : false)

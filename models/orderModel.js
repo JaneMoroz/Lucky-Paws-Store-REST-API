@@ -77,7 +77,7 @@ const OrderSchema = new mongoose.Schema(
 OrderSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'cart',
-    select: 'products',
+    select: 'products subtotal taxes shippingPrice total',
   });
   next();
 });

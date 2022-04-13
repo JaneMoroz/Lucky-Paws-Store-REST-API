@@ -1,0 +1,23 @@
+extends base 
+include _accountNav
+include _accountManage
+
+block content
+  .account
+    if(myReviews)
+      +accountNavigation("MyReviews")
+      div(class="account__container")
+        +manage("My Reviews", "review", reviews)
+    if(allProducts)
+      +accountNavigation("ManageProducts")
+      div(class="account__container")
+        +manage("List of Products", "product", products)
+    if(allUsers)
+      +accountNavigation("ManageUsers")
+      div(class="account__container")
+        +manage("List of Users", "user", users)
+    if(allReviews)
+      +accountNavigation("ManageReviews")
+      div(class="account__container")
+        +manage("List of Reviews", "review", reviews)
+      

@@ -1,0 +1,26 @@
+include _icons
+
+mixin manage(title, dataType, data)
+  h1.list-title.heading-primary--main=title
+  if(allProducts)
+    a(href="#" class="order__btn btn btn-color btn-color--mixed") Add New Product
+  ul.list
+    each el in data
+      li.list-el
+        div(class="list-el__details-box")
+          if(dataType === "product")
+            img(src=`${el.primaryImage}`, alt=`${el.name}`)
+            a.btn.btn-text--sub(href=`/product/${el.slug}`)=el.name
+          if(dataType === "user")
+            img(src=`${el.photo}`, alt=`${el.name}`)
+            span=el.name
+          if(dataType === "review")
+            img(src=`${el.product.primaryImage}`, alt=`${el.product.name}`)
+            span=el.title
+        div(class="list-el__details-btns")
+          a.btn.btn-icon(href="#")
+            +icons("eye")
+          a.btn.btn-icon(href="#")
+            +icons("pencil")
+          a.btn.btn-icon(href="#")
+            +icons("trash")

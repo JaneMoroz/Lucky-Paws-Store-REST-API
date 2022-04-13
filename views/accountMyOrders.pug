@@ -21,7 +21,7 @@ block content
               | Delivered
             div(class="order__details")
               span(class="order__quantity")=`${quantity}pc`
-              span(class="order__total-price")=`$${order.totalPrice}`
+              span(class="order__total-price")=`$${order.cart.total}`
             div(class="order__customer")
               span(class="order__customer-name")=order.user.name
               span(class="order__customer-address")=`${order.shippingAddress.country}, ${order.shippingAddress.postalCode}, ${order.shippingAddress.city}, ${order.shippingAddress.address}`

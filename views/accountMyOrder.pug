@@ -10,18 +10,30 @@ block content
         h2(class="order__data heading-tertiary")=date
         ul(class="order__products-list")
           each product in order.cart.products
-            li(class="order__product")
-              span(class="order__product-details")
-                img(src=`${product.product.primaryImage}`, alt=`${product.product.name}`, class="order__product-img")
-                a.btn.btn-text--sub(href=`/product/${product.product.slug}`)=product.product.name
-              span(class="order__product-price")=`$${product.totalPrice}`
+            if(product.quantity > 1)
+              -var n = 0
+              while n < product.quantity
+                li(class="order__product")
+                  span(class="order__product-details")
+                    img(src=`${product.product.primaryImage}`, alt=`${product.product.name}`, class="order__product-img")
+                    a.btn.btn-text--sub(href=`/product/${product.product.slug}`)=product.product.name
+                  span(class="order__product-price")=`$${product.purchasePrice}`
+                  - n++
+            else 
+              li(class="order__product")
+                  span(class="order__product-details")
+                    img(src=`${product.product.primaryImage}`, alt=`${product.product.name}`, class="order__product-img")
+                    a.btn.btn-text--sub(href=`/product/${product.product.slug}`)=product.product.name
+                  span(class="order__product-price")=`$${product.purchasePrice}`
         div(class="order__price")
+          span(class="order__price-name") Subtotal:
+          span=`$${order.cart.subtotal}`
           span(class="order__price-name") Taxes:
-          span=`$${order.taxPrice}`
+          span=`$${order.cart.taxes}`
           span(class="order__price-name") Shipping Price:
-          span=`$${order.shippingPrice}`
+          span=`$${order.cart.shippingPrice}`
           span(class="order__price-name order__price-total") Total:
-          span=`$${order.totalPrice}`
+          span=`$${order.cart.total}`
         div(class="order__details")
           div(class="order__customer")
             span(class="order__customer-name")=order.user.name
@@ -33,4 +45,4 @@ block content
             div(class=`order__status order__status--${order.isDelivered ? 'green' : 'red'}`)
               span
               | Delivered
-        a(class="order__btn btn btn-color btn-color--mixed") Save
+        a(href="/my-orders" class="order__btn btn btn-color btn-color--mixed") Back

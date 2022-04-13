@@ -751,6 +751,9 @@ body {
 }
 .order__product-details a {
   padding: 0;
+  max-width: 25rem;
+  display: inline-block;
+  text-align: start;
 }
 .order__status {
   display: flex;
@@ -1346,6 +1349,10 @@ body {
   height: 2.8rem;
   width: 2.8rem;
   stroke-width: 1.5px;
+}
+
+.account__container {
+  min-width: 35rem;
 }
 
 .pdp {
