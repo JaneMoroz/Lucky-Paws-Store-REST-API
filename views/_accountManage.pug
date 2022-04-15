@@ -24,7 +24,11 @@ mixin manage(title, dataType, data)
           else 
             a.btn.btn-icon(href="#")
               +icons("eye")
-          a.btn.btn-icon(href="#")
-            +icons("pencil")
+          if(dataType === "product")
+            a.btn.btn-icon(href=`/manage-products/${el.id}`)
+              +icons("pencil")
+          else 
+            a.btn.btn-icon(href="#")
+              +icons("pencil")
           a.btn.btn-icon(href="#")
             +icons("trash")

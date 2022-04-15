@@ -517,7 +517,7 @@ function hmrAcceptRun(bundle, id) {
 var _webImmediateJs = require("core-js/modules/web.immediate.js");
 var _login = require("./login");
 var _updateSettings = require("./updateSettings");
-var _newProduct = require("./newProduct");
+var _product = require("./product");
 var _runtime = require("regenerator-runtime/runtime");
 /////////////////////////////////////////////////////////////////////
 // Dom elements
@@ -526,6 +526,7 @@ const logOutBtn = document.querySelector('.account__nav-el--logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const addNewProductForm = document.querySelector('.form--add-product');
+const editProductForm = document.querySelector('.form--edit-product');
 /////////////////////////////////////////////////////////////////////
 // Login
 if (loginForm) loginForm.addEventListener('submit', (e)=>{
@@ -568,43 +569,72 @@ if (userPasswordForm) userPasswordForm.addEventListener('submit', async (e)=>{
 });
 /////////////////////////////////////////////////////////////////////
 // Product/ Add New Product
-if (addNewProductForm) {
-    console.log('form is resdy');
-    addNewProductForm.addEventListener('submit', async (e)=>{
-        e.preventDefault();
-        document.querySelector('.btn--add-product').textContent = 'Adding...';
-        const data = {};
-        data.name = document.getElementById('productName').value;
-        data.type = document.getElementById('type').value;
-        data.animal = document.getElementById('animal').value;
-        data.brand = document.getElementById('brand').value;
-        data.price = +document.getElementById('price').value;
-        data.countInStock = +document.getElementById('countInStock').value;
-        data.features = [
-            document.getElementById('feature1').value,
-            document.getElementById('feature2').value,
-            document.getElementById('feature3').value,
-            document.getElementById('feature4').value, 
-        ].filter((el)=>el !== ''
-        );
-        data.primaryImage = document.getElementById('primaryImg').value;
-        data.otherImages = [
-            document.getElementById('otherImg1').value,
-            document.getElementById('otherImg2').value,
-            ,
-            document.getElementById('otherImg3').value, 
-        ].filter((el)=>el !== ''
-        );
-        const color = document.getElementById('colors').value.split(', ');
-        data.color = color.length === 0 ? [] : color;
-        const style = document.getElementById('styles').value.split(', ');
-        data.style = style.length === 0 ? [] : style;
-        console.log(data);
-        await _newProduct.addNewProduct(data);
-    });
-}
+if (addNewProductForm) addNewProductForm.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    document.querySelector('.btn--add-product').textContent = 'Adding...';
+    const data = {};
+    data.name = document.getElementById('productName').value;
+    data.type = document.getElementById('type').value;
+    data.animal = document.getElementById('animal').value;
+    data.brand = document.getElementById('brand').value;
+    data.price = +document.getElementById('price').value;
+    data.countInStock = +document.getElementById('countInStock').value;
+    data.features = [
+        document.getElementById('feature1').value,
+        document.getElementById('feature2').value,
+        document.getElementById('feature3').value,
+        document.getElementById('feature4').value, 
+    ].filter((el)=>el !== ''
+    );
+    data.primaryImage = document.getElementById('primaryImg').value;
+    data.otherImages = [
+        document.getElementById('otherImg1').value,
+        document.getElementById('otherImg2').value,
+        ,
+        document.getElementById('otherImg3').value, 
+    ].filter((el)=>el !== ''
+    );
+    const color = document.getElementById('colors').value.split(', ');
+    data.color = color.length === 0 || color[0] === '' ? [] : color;
+    const style = document.getElementById('styles').value.split(', ');
+    data.style = style.length === 0 || style[0] === '' ? [] : style;
+    await _product.addNewProduct(data);
+});
+// Edit Product
+if (editProductForm) editProductForm.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    document.querySelector('.btn--edit-product').textContent = 'Editing...';
+    const productId = document.querySelector('.btn--edit-product').dataset.productid;
+    const data = {};
+    data.name = document.getElementById('productName').value;
+    data.type = document.getElementById('type').value;
+    data.animal = document.getElementById('animal').value;
+    data.brand = document.getElementById('brand').value;
+    data.price = +document.getElementById('price').value;
+    data.countInStock = +document.getElementById('countInStock').value;
+    data.features = [
+        document.getElementById('feature1').value,
+        document.getElementById('feature2').value,
+        document.getElementById('feature3').value,
+        document.getElementById('feature4').value, 
+    ].filter((el)=>el !== ''
+    );
+    data.primaryImage = document.getElementById('primaryImg').value;
+    data.otherImages = [
+        document.getElementById('otherImg1').value,
+        document.getElementById('otherImg2').value,
+        ,
+        document.getElementById('otherImg3').value, 
+    ].filter((el)=>el !== ''
+    );
+    const color = document.getElementById('colors').value.split(', ');
+    data.color = color.length === 0 || color[0] === '' ? [] : color;
+    const style = document.getElementById('styles').value.split(', ');
+    data.style = style.length === 0 || style[0] === '' ? [] : style;
+    await _product.editProduct(productId, data);
+});
 
-},{"core-js/modules/web.immediate.js":"49tUX","./login":"7yHem","./updateSettings":"l3cGY","regenerator-runtime/runtime":"dXNgZ","./newProduct":"4cDGZ"}],"49tUX":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"49tUX","./login":"7yHem","./updateSettings":"l3cGY","regenerator-runtime/runtime":"dXNgZ","./product":"7nZ8B"}],"49tUX":[function(require,module,exports) {
 var $ = require('../internals/export');
 var global = require('../internals/global');
 var task = require('../internals/task');
@@ -3843,10 +3873,12 @@ try {
     else Function("r", "regeneratorRuntime = r")(runtime);
 }
 
-},{}],"4cDGZ":[function(require,module,exports) {
+},{}],"7nZ8B":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "addNewProduct", ()=>addNewProduct
+);
+parcelHelpers.export(exports, "editProduct", ()=>editProduct
 );
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
@@ -3859,6 +3891,23 @@ const addNewProduct = async (data)=>{
         });
         if (res.data.status === 'success') {
             console.log('Product is created');
+            window.setTimeout(()=>{
+                location.assign('/manage-products');
+            }, 1500);
+        }
+    } catch (err) {
+        console.log('Smth went wrong!');
+    }
+};
+const editProduct = async (productId, data)=>{
+    try {
+        const res = await _axiosDefault.default({
+            method: 'PATCH',
+            url: `/api/v1/products/${productId}`,
+            data
+        });
+        if (res.data.status === 'success') {
+            console.log('Product is updated');
             window.setTimeout(()=>{
                 location.assign('/manage-products');
             }, 1500);

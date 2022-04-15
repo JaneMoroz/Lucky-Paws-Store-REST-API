@@ -201,3 +201,12 @@ exports.getAddNewProductForm = catchAsync(async (req, res, next) => {
     title: 'Add New Product',
   });
 });
+
+exports.getEditProductForm = catchAsync(async (req, res, next) => {
+  const product = await Product.findById(req.params.id);
+
+  res.status(200).render('accountEditProduct', {
+    title: 'Edit Product',
+    product,
+  });
+});

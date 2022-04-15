@@ -57,4 +57,10 @@ router.get(
   viewController.getAddNewProductForm
 );
 
+router.get(
+  '/manage-products/:id',
+  authController.protect,
+  viewController.getEditProductForm
+);
+
 module.exports = router;
