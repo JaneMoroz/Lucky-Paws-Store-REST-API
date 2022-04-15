@@ -1,6 +1,7 @@
 import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
 import { addNewProduct, editProduct } from './product';
+import { addCartItem, deleteCartItem } from './cart';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -13,6 +14,8 @@ const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const addNewProductForm = document.querySelector('.form--add-product');
 const editProductForm = document.querySelector('.form--edit-product');
+const cart = document.querySelector('.cart');
+const pdp = document.querySelector('.pdp');
 
 /////////////////////////////////////////////////////////////////////
 // Login
@@ -141,5 +144,38 @@ if (editProductForm) {
     data.style = style.length === 0 || style[0] === '' ? [] : style;
 
     await editProduct(productId, data);
+  });
+}
+
+/////////////////////////////////////////////////////////////////////
+// Cart
+if (cart) {
+  const deleteCartItemBtns = document.querySelectorAll(
+    '.cart__details-btns--delete'
+  );
+  deleteCartItemBtns.forEach((btn) =>
+    btn.addEventListener('click', async (e) => {
+      const cartId = cart.dataset.cartid;
+      const cartItemId = btn.dataset.cartitemid;
+
+      await deleteCartItem(cartId, cartItemId);
+    })
+  );
+}
+
+/////////////////////////////////////////////////////////////////////
+// Product
+// Add to cart
+if (pdp) {
+  const addToCartBtn = pdp.querySelector('.pdp__btns-add-to-cart ');
+  addToCartBtn.addEventListener('click', async (e) => {
+    const cartItem = {};
+    cartItem.product = pdp.dataset.productid;
+    cartItem.quantity = 1;
+    cartItem.purchasePrice = +pdp
+      .querySelector('.pdp__prices--current')
+      .innerText.substring(1);
+
+    await addCartItem(cartItem);
   });
 }

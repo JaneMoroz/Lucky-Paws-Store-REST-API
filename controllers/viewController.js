@@ -1,6 +1,7 @@
 const Product = require('./../models/productModel');
 const Order = require('./../models/orderModel');
 const Review = require('./../models/reviewModel');
+const Cart = require('./../models/cartModel');
 const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
@@ -208,5 +209,24 @@ exports.getEditProductForm = catchAsync(async (req, res, next) => {
   res.status(200).render('accountEditProduct', {
     title: 'Edit Product',
     product,
+  });
+});
+
+////////////////////////////////////////////////////////////////
+// Cart
+exports.getCart = catchAsync(async (req, res, next) => {
+  let cart = [];
+  const cartArr = await Cart.find({
+    user: req.user.id,
+    ordered: false,
+  });
+
+  if (cartArr.length >= 1) {
+    cart = cartArr[0];
+  } else cart = [];
+
+  res.status(200).render('cart', {
+    title: 'Your Cart',
+    cart,
   });
 });

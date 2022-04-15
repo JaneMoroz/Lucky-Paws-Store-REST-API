@@ -1,0 +1,52 @@
+extends base
+include _icons 
+
+block content
+  if(cart.length !== 0 && cart.products.length !== 0)
+    div(class="cart", data-cartId=`${cart.id}`)
+      h1.heading-primary--main Your Cart
+      ul(class="cart__list")
+        each product in cart.products
+          if(product.quantity > 1)
+            -var n = 0
+            while n < product.quantity
+              - n++
+              li.list-el
+                div(class="list-el__details-box")
+                  img(src=`${product.product.primaryImage}`, alt=`${product.product.name}`)
+                  a.btn.btn-text.btn-text--small(href=`/product/${[product.product.slug]}`)=product.product.name
+                  span(class="list-el__last-span")=`$${product.purchasePrice}`
+                div(class="list-el__details-btns")
+                  a(class="btn btn-icon cart__details-btns--delete", data-cartItemId=`${product.id}`)
+                    +icons("trash")
+          else 
+            li.list-el
+              div(class="list-el__details-box")
+                img(src=`${product.product.primaryImage}`, alt=`${product.product.name}`)
+                a.btn.btn-text.btn-text--small(href=`/product/${[product.product.slug]}`)=product.product.name
+                span(class="list-el__last-span")=`$${product.purchasePrice}`
+              div(class="list-el__details-btns")
+                a(class="btn btn-icon cart__details-btns--delete", data-cartItemId=`${product.id}`)
+                  +icons("trash")
+      div(class="cart__prices")
+        div
+          span Subtotal:
+          span=`$${cart.subtotal}`
+        div
+          span Taxes:
+          span=`$${cart.taxes}`
+        div
+          span Shipping price:
+          span=`$${cart.shippingPrice}`
+        div(class="cart__prices--total")
+          span Total:
+          span=`$${cart.total}`
+      div(class="cart__form")
+        form.form.form--big(action="#")
+          div(class="form__group")
+            input#address(type="text", class="form__input", placeholder="Country, City, Index, Address", required)
+          div(class="form__group")
+            a.btn.btn-color.btn-color--mixed  Continue with Payment 
+  else 
+    div(class="cart")
+      h1.heading-primary--main Your Cart is empty

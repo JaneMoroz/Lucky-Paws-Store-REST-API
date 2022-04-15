@@ -24,7 +24,7 @@ html
               svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor")
                 path(stroke-linecap="round", stroke-linejoin="round", d="M4 6h16M4 12h16M4 18h16")
           div(class="header-tabs__el header-tabs__el--logo")
-            a.btn(href="#")
+            a.btn(href="/")
               img.logo(src="https://i.ibb.co/94gqm8h/logo.png", alt="Lucky paws logo")
           div(class="header-tabs__el")
             a.btn.btn-icon(href="#")
@@ -36,7 +36,7 @@ html
             a.btn.btn-icon(href=`${user ? '/my-account' : '/login'}`)
               +icons("account")
           div(class="header-tabs__el")
-            a.btn.btn-icon(href="#")
+            a.btn.btn-icon(href="/cart")
               +icons("cart")
         // Navigation
         nav.nav

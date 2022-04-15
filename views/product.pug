@@ -2,7 +2,7 @@ extends base
 include _reviewCard
 
 block content 
- .pdp
+ .pdp(data-productId=`${product.id}`)
     div(class="pdp__img-box")
       div(class="pdp__img--primary")
         img(src=`${product.primaryImage}`, alt="Product Image")
@@ -42,7 +42,7 @@ block content
         else 
           span(class="pdp__prices--current")=`$${product.price}`
       div(class="pdp__btns")
-        button.btn.btn-color.btn-color--mixed Add To Cart
+        button.btn.btn-color.btn-color--mixed.pdp__btns-add-to-cart Add To Cart
         button.btn.btn-icon
           svg(xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor")
             path(stroke-linecap="round", stroke-linejoin="round", d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z")

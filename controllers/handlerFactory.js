@@ -5,7 +5,6 @@ const APIFeatures = require('./../utils/apiFeatures');
 // Get all
 exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
-    console.log(req.params);
     let filter = {};
     if (req.params.productId) filter = { product: req.params.productId };
     if (req.params.userId) filter = { user: req.params.userId };

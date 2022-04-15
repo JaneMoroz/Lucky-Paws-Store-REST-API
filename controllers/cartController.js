@@ -97,17 +97,39 @@ exports.updateCartItem = catchAsync(async (req, res, next) => {
 
 // Delete Cart Item
 exports.deleteCartItem = catchAsync(async (req, res, next) => {
+  // Get cart
   const userCart = await Cart.findById(req.params.id);
 
   if (!userCart) {
     return next(new AppError('No cart found with that ID', 404));
   }
 
-  const itemIndex = userCart.products.findIndex(
-    (el) => el.id === req.params.cartItemId
+  // Find cart item by id
+  const cartItem = userCart.products.find(
+    (product) => product.id === req.params.cartItemId
   );
 
-  userCart.products = userCart.products.splice(itemIndex, 1);
+  if (!cartItem) {
+    return next(
+      new AppError('No product found with that ID in your cart', 404)
+    );
+  }
+
+  // If the quantity is more than 1, decrease cart item quantity by 1,
+  // if the quantity is equal 1, delete cart item
+  if (cartItem.quantity > 1) {
+    cartItem.quantity -= 1;
+  } else {
+    const itemIndex = userCart.products.findIndex(
+      (el) => el.id === req.params.cartItemId
+    );
+
+    console.log(itemIndex);
+
+    if (itemIndex !== 0) {
+      userCart.products = userCart.products.splice(itemIndex, 1);
+    } else userCart.products.pop();
+  }
 
   await userCart.save();
   res.status(204).json({

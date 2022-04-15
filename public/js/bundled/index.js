@@ -518,6 +518,7 @@ var _webImmediateJs = require("core-js/modules/web.immediate.js");
 var _login = require("./login");
 var _updateSettings = require("./updateSettings");
 var _product = require("./product");
+var _cart = require("./cart");
 var _runtime = require("regenerator-runtime/runtime");
 /////////////////////////////////////////////////////////////////////
 // Dom elements
@@ -527,6 +528,8 @@ const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const addNewProductForm = document.querySelector('.form--add-product');
 const editProductForm = document.querySelector('.form--edit-product');
+const cart = document.querySelector('.cart');
+const pdp = document.querySelector('.pdp');
 /////////////////////////////////////////////////////////////////////
 // Login
 if (loginForm) loginForm.addEventListener('submit', (e)=>{
@@ -633,8 +636,32 @@ if (editProductForm) editProductForm.addEventListener('submit', async (e)=>{
     data.style = style.length === 0 || style[0] === '' ? [] : style;
     await _product.editProduct(productId, data);
 });
+/////////////////////////////////////////////////////////////////////
+// Cart
+if (cart) {
+    const deleteCartItemBtns = document.querySelectorAll('.cart__details-btns--delete');
+    deleteCartItemBtns.forEach((btn)=>btn.addEventListener('click', async (e)=>{
+            const cartId = cart.dataset.cartid;
+            const cartItemId = btn.dataset.cartitemid;
+            await _cart.deleteCartItem(cartId, cartItemId);
+        })
+    );
+}
+/////////////////////////////////////////////////////////////////////
+// Product
+// Add to cart
+if (pdp) {
+    const addToCartBtn = pdp.querySelector('.pdp__btns-add-to-cart ');
+    addToCartBtn.addEventListener('click', async (e)=>{
+        const cartItem = {};
+        cartItem.product = pdp.dataset.productid;
+        cartItem.quantity = 1;
+        cartItem.purchasePrice = +pdp.querySelector('.pdp__prices--current').innerText.substring(1);
+        await _cart.addCartItem(cartItem);
+    });
+}
 
-},{"core-js/modules/web.immediate.js":"49tUX","./login":"7yHem","./updateSettings":"l3cGY","regenerator-runtime/runtime":"dXNgZ","./product":"7nZ8B"}],"49tUX":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"49tUX","./login":"7yHem","./updateSettings":"l3cGY","regenerator-runtime/runtime":"dXNgZ","./product":"7nZ8B","./cart":"a8uvd"}],"49tUX":[function(require,module,exports) {
 var $ = require('../internals/export');
 var global = require('../internals/global');
 var task = require('../internals/task');
@@ -3912,6 +3939,43 @@ const editProduct = async (productId, data)=>{
                 location.assign('/manage-products');
             }, 1500);
         }
+    } catch (err) {
+        console.log('Smth went wrong!');
+    }
+};
+
+},{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"a8uvd":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "addCartItem", ()=>addCartItem
+);
+parcelHelpers.export(exports, "deleteCartItem", ()=>deleteCartItem
+);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+const addCartItem = async (data)=>{
+    try {
+        const res = await _axiosDefault.default({
+            method: 'POST',
+            url: `/api/v1/cart/`,
+            data
+        });
+        if (res.data.status === 'success') console.log('You added an item to your cart!');
+    } catch (err) {
+        console.log('Smth went wrong!');
+    }
+};
+const deleteCartItem = async (cartId, cartItemId)=>{
+    console.log(cartId, cartItemId);
+    try {
+        const res = await _axiosDefault.default({
+            method: 'DELETE',
+            url: `/api/v1/cart/${cartId}/${cartItemId}`
+        });
+        console.log('You deleted an item from your cart!');
+        window.setTimeout(()=>{
+            location.assign('/cart');
+        }, 1500);
     } catch (err) {
         console.log('Smth went wrong!');
     }

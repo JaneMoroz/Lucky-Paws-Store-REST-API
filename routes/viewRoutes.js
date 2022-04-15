@@ -63,4 +63,6 @@ router.get(
   viewController.getEditProductForm
 );
 
+router.get('/cart', authController.protect, viewController.getCart);
+
 module.exports = router;
