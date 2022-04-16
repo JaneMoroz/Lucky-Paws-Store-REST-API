@@ -124,11 +124,9 @@ exports.deleteCartItem = catchAsync(async (req, res, next) => {
       (el) => el.id === req.params.cartItemId
     );
 
-    console.log(itemIndex);
-
     if (itemIndex !== 0) {
       userCart.products = userCart.products.splice(itemIndex, 1);
-    } else userCart.products.pop();
+    } else userCart.products.shift();
   }
 
   await userCart.save();

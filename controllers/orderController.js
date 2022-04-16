@@ -1,3 +1,4 @@
+const Stripe = require('stripe');
 const catchAsync = require('./../utils/catchAsync');
 const Order = require('./../models/orderModel');
 const factory = require('./handlerFactory');
@@ -5,24 +6,64 @@ const Cart = require('../models/cartModel');
 const AppError = require('./../utils/appError');
 
 ////////////////////////////////////////////////////////////////
-// Get "me" Middleware
-exports.getMe = (req, res, next) => {
-  req.params.userId = req.user.id;
-  next();
-};
+// Stripe
+exports.getCheckoutSession = catchAsync(async (req, res, next) => {
+  console.log(req.params);
+  // 1. Get cart
+  const cart = await Cart.findById(req.params.cartId);
+  // const address = req.params.address.split(', ');
 
-// Get product id
-// exports.setOrderId = (req, res, next) => {
-//   if (!req.body.product) req.body.product = req.params.productId;
-//   req.body.user = req.user.id;
-//   next();
+  // let customer_details = {
+  //   address: {
+  //     country: `${address[0] ? address[0] : ''}`,
+  //     city: `${address[1] ? address[1] : ''}`,
+  //     postal_code: `${address[2] ? address[2] : ''}`,
+  //     line1: `${address[3] ? address[3] : ''}`,
+  //   },
+  // };
+  // console.log(customer_details);
+
+  let line_items = [];
+  cart.products.forEach((product) => {
+    const line_item = {
+      quantity: product.quantity,
+      price_data: {
+        currency: 'usd',
+        unit_amount: product.purchasePrice * 100, // price expected in cents
+        product_data: {
+          name: `${product.product.name}`,
+          images: [`${product.product.primaryImage}`],
+        },
+      },
+    };
+    line_items.push(line_item);
+  });
+
+  // 2. Create checkout session
+  const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    success_url: `${req.protocol}://${req.get('host')}/my-orders`,
+    cancel_url: `${req.protocol}://${req.get('host')}/cart`,
+    customer_email: req.user.email,
+    client_reference_id: req.params.cartId,
+    mode: 'payment',
+    line_items,
+  });
+
+  // 3. Create session as response
+  res.status(200).json({
+    status: 'success',
+    session,
+  });
+});
+
+// const createBookingCheckout = async (session) => {
+//   const tour = session.client_reference_id;
+//   const user = (await User.findOne({ email: session.customer_email })).id;
+//   const price = session.amount_total / 100;
+//   await Booking.create({ tour, user, price });
 // };
-
-// Get all orders
-exports.getAllOrders = factory.getAll(Order);
-
-// Get order
-exports.getOrder = factory.getOne(Order);
 
 // Create order
 exports.createOrder = catchAsync(async (req, res, next) => {
@@ -58,6 +99,42 @@ exports.createOrder = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+// exports.webhookCheckout = (req, res, next) => {
+//   const signature = req.headers['stripe-signature'];
+//   let event;
+//   try {
+//     const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+//     event = stripe.webhooks.constructEvent(
+//       req.body,
+//       signature,
+//       process.env.STRIPE_WEBHOOK_SECRET
+//     );
+//   } catch (err) {
+//     return res.status(400).send(`Webhook error: ${err.message}`);
+//   }
+
+//   if (event.type === 'checkout.session.completed') {
+//     createOrderCheckout(event.data.object);
+//   }
+
+//   res.status(200).json({
+//     received: true,
+//   });
+// };
+
+////////////////////////////////////////////////////////////////
+// Get "me" Middleware
+exports.getMe = (req, res, next) => {
+  req.params.userId = req.user.id;
+  next();
+};
+
+// Get all orders
+exports.getAllOrders = factory.getAll(Order);
+
+// Get order
+exports.getOrder = factory.getOne(Order);
 
 // Update order to paid
 exports.updateOrderToPaid = catchAsync(async (req, res, next) => {

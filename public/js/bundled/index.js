@@ -519,6 +519,7 @@ var _login = require("./login");
 var _updateSettings = require("./updateSettings");
 var _product = require("./product");
 var _cart = require("./cart");
+var _stripe = require("./stripe");
 var _runtime = require("regenerator-runtime/runtime");
 /////////////////////////////////////////////////////////////////////
 // Dom elements
@@ -639,13 +640,20 @@ if (editProductForm) editProductForm.addEventListener('submit', async (e)=>{
 /////////////////////////////////////////////////////////////////////
 // Cart
 if (cart) {
+    // Delete an Item from the card
+    const cartId = cart.dataset.cartid;
     const deleteCartItemBtns = document.querySelectorAll('.cart__details-btns--delete');
     deleteCartItemBtns.forEach((btn)=>btn.addEventListener('click', async (e)=>{
-            const cartId = cart.dataset.cartid;
             const cartItemId = btn.dataset.cartitemid;
             await _cart.deleteCartItem(cartId, cartItemId);
         })
     );
+    // Stripe/Checkout Session
+    const addressForm = cart.querySelector('.form--address');
+    addressForm.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        _stripe.payForOrder(cartId);
+    });
 }
 /////////////////////////////////////////////////////////////////////
 // Product
@@ -661,7 +669,7 @@ if (pdp) {
     });
 }
 
-},{"core-js/modules/web.immediate.js":"49tUX","./login":"7yHem","./updateSettings":"l3cGY","regenerator-runtime/runtime":"dXNgZ","./product":"7nZ8B","./cart":"a8uvd"}],"49tUX":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"49tUX","./login":"7yHem","./updateSettings":"l3cGY","./product":"7nZ8B","./cart":"a8uvd","regenerator-runtime/runtime":"dXNgZ","./stripe":"10tSC"}],"49tUX":[function(require,module,exports) {
 var $ = require('../internals/export');
 var global = require('../internals/global');
 var task = require('../internals/task');
@@ -3334,6 +3342,86 @@ const updateSettings = async (data, type)=>{
     }
 };
 
+},{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7nZ8B":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "addNewProduct", ()=>addNewProduct
+);
+parcelHelpers.export(exports, "editProduct", ()=>editProduct
+);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+const addNewProduct = async (data)=>{
+    try {
+        const res = await _axiosDefault.default({
+            method: 'POST',
+            url: '/api/v1/products/',
+            data
+        });
+        if (res.data.status === 'success') {
+            console.log('Product is created');
+            window.setTimeout(()=>{
+                location.assign('/manage-products');
+            }, 1500);
+        }
+    } catch (err) {
+        console.log('Smth went wrong!');
+    }
+};
+const editProduct = async (productId, data)=>{
+    try {
+        const res = await _axiosDefault.default({
+            method: 'PATCH',
+            url: `/api/v1/products/${productId}`,
+            data
+        });
+        if (res.data.status === 'success') {
+            console.log('Product is updated');
+            window.setTimeout(()=>{
+                location.assign('/manage-products');
+            }, 1500);
+        }
+    } catch (err) {
+        console.log('Smth went wrong!');
+    }
+};
+
+},{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"a8uvd":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "addCartItem", ()=>addCartItem
+);
+parcelHelpers.export(exports, "deleteCartItem", ()=>deleteCartItem
+);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+const addCartItem = async (data)=>{
+    try {
+        const res = await _axiosDefault.default({
+            method: 'POST',
+            url: `/api/v1/cart/`,
+            data
+        });
+        if (res.data.status === 'success') console.log('You added an item to your cart!');
+    } catch (err) {
+        console.log('Smth went wrong!');
+    }
+};
+const deleteCartItem = async (cartId, cartItemId)=>{
+    try {
+        const res = await _axiosDefault.default({
+            method: 'DELETE',
+            url: `/api/v1/cart/${cartId}/${cartItemId}`
+        });
+        console.log('You deleted an item from your cart!');
+        window.setTimeout(()=>{
+            location.assign('/cart');
+        }, 1500);
+    } catch (err) {
+        console.log('Smth went wrong!');
+    }
+};
+
 },{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dXNgZ":[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -3900,84 +3988,23 @@ try {
     else Function("r", "regeneratorRuntime = r")(runtime);
 }
 
-},{}],"7nZ8B":[function(require,module,exports) {
+},{}],"10tSC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "addNewProduct", ()=>addNewProduct
-);
-parcelHelpers.export(exports, "editProduct", ()=>editProduct
+parcelHelpers.export(exports, "payForOrder", ()=>payForOrder
 );
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
-const addNewProduct = async (data)=>{
+const stripe = Stripe('pk_test_51KooxlKe4i014ciff50JhbP4SfRYU8h7M5aopsfuuuuojXhdA7xCqYOlE01M0qJqsvSUJeE8cNguOBRVKUEcLjqB008AKZPWOd');
+const payForOrder = async (cartId)=>{
     try {
-        const res = await _axiosDefault.default({
-            method: 'POST',
-            url: '/api/v1/products/',
-            data
+        const session = await _axiosDefault.default(`/api/v1/order/checkout-session/${cartId}/`);
+        // 2. Create checkout form + charge a credit card
+        await stripe.redirectToCheckout({
+            sessionId: session.data.session.id
         });
-        if (res.data.status === 'success') {
-            console.log('Product is created');
-            window.setTimeout(()=>{
-                location.assign('/manage-products');
-            }, 1500);
-        }
     } catch (err) {
-        console.log('Smth went wrong!');
-    }
-};
-const editProduct = async (productId, data)=>{
-    try {
-        const res = await _axiosDefault.default({
-            method: 'PATCH',
-            url: `/api/v1/products/${productId}`,
-            data
-        });
-        if (res.data.status === 'success') {
-            console.log('Product is updated');
-            window.setTimeout(()=>{
-                location.assign('/manage-products');
-            }, 1500);
-        }
-    } catch (err) {
-        console.log('Smth went wrong!');
-    }
-};
-
-},{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"a8uvd":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "addCartItem", ()=>addCartItem
-);
-parcelHelpers.export(exports, "deleteCartItem", ()=>deleteCartItem
-);
-var _axios = require("axios");
-var _axiosDefault = parcelHelpers.interopDefault(_axios);
-const addCartItem = async (data)=>{
-    try {
-        const res = await _axiosDefault.default({
-            method: 'POST',
-            url: `/api/v1/cart/`,
-            data
-        });
-        if (res.data.status === 'success') console.log('You added an item to your cart!');
-    } catch (err) {
-        console.log('Smth went wrong!');
-    }
-};
-const deleteCartItem = async (cartId, cartItemId)=>{
-    console.log(cartId, cartItemId);
-    try {
-        const res = await _axiosDefault.default({
-            method: 'DELETE',
-            url: `/api/v1/cart/${cartId}/${cartItemId}`
-        });
-        console.log('You deleted an item from your cart!');
-        window.setTimeout(()=>{
-            location.assign('/cart');
-        }, 1500);
-    } catch (err) {
-        console.log('Smth went wrong!');
+        console.log(err);
     }
 };
 

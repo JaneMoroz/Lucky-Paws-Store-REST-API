@@ -2,6 +2,7 @@ import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
 import { addNewProduct, editProduct } from './product';
 import { addCartItem, deleteCartItem } from './cart';
+import { payForOrder } from './stripe';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -150,17 +151,25 @@ if (editProductForm) {
 /////////////////////////////////////////////////////////////////////
 // Cart
 if (cart) {
+  // Delete an Item from the card
+  const cartId = cart.dataset.cartid;
   const deleteCartItemBtns = document.querySelectorAll(
     '.cart__details-btns--delete'
   );
   deleteCartItemBtns.forEach((btn) =>
     btn.addEventListener('click', async (e) => {
-      const cartId = cart.dataset.cartid;
       const cartItemId = btn.dataset.cartitemid;
 
       await deleteCartItem(cartId, cartItemId);
     })
   );
+
+  // Stripe/Checkout Session
+  const addressForm = cart.querySelector('.form--address');
+  addressForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    payForOrder(cartId);
+  });
 }
 
 /////////////////////////////////////////////////////////////////////

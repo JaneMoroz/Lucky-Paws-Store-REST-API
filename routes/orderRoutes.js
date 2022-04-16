@@ -1,12 +1,17 @@
 const express = require('express');
 const orderController = require('../controllers/orderController');
 const authController = require('./../controllers/authController');
+const viewController = require('./../controllers/viewController');
 
 ////////////////////////////////////////////////////////////////
 // Routing
 const router = express.Router();
 
 router.use(authController.protect);
+////////////////////////////////////////////////////////////////
+// Stripe
+
+router.get('/checkout-session/:cartId/', orderController.getCheckoutSession);
 
 ////////////////////////////////////////////////////////////////
 // Customer Order Routes

@@ -109,6 +109,11 @@ body {
   cursor: pointer;
 }
 
+.btn--back {
+  margin: 1.6rem 0;
+  justify-content: center !important;
+}
+
 .btn-icon {
   display: block;
   background-color: transparent;

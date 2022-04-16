@@ -19,7 +19,6 @@ export const addCartItem = async (data) => {
 
 // Delete cart item
 export const deleteCartItem = async (cartId, cartItemId) => {
-  console.log(cartId, cartItemId);
   try {
     const res = await axios({
       method: 'DELETE',

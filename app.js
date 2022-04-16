@@ -12,6 +12,7 @@ const reviewRouter = require('./routes/reviewRoutes');
 const cartRouter = require('./routes/cartRoutes');
 const orderRouter = require('./routes/orderRoutes');
 const viewRouter = require('./routes/viewRoutes');
+const orderController = require('./controllers/orderController');
 
 const app = express();
 
@@ -30,8 +31,12 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-// Express middleware: body parser, reading data from body into rq.body
-app.use(express.json());
+// Stripe Webhook
+// app.post(
+//   '/webhook-checkout',
+//   express.raw({ type: 'application/json' }),
+//   orderController.webhookCheckout
+// );
 
 // Express middleware: body parser, reading data from body into rq.body
 app.use(express.json({ limit: '10kb' }));
@@ -45,7 +50,6 @@ app.use(cookieParser());
 // Test middleware
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
-  console.log(req.cookies);
   next();
 });
 

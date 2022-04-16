@@ -42,11 +42,12 @@ block content
           span Total:
           span=`$${cart.total}`
       div(class="cart__form")
-        form.form.form--big(action="#")
+        form.form.form--big.form--address
           div(class="form__group")
-            input#address(type="text", class="form__input", placeholder="Country, City, Index, Address", required)
+            input#address(type="text", class="form__input", placeholder="Country, City, Index, Address")
           div(class="form__group")
-            a.btn.btn-color.btn-color--mixed  Continue with Payment 
+            button.btn.btn-color.btn-color--mixed Continue with Payment 
   else 
     div(class="cart")
       h1.heading-primary--main Your Cart is empty
+      a.btn.btn-color.btn-color--mixed.btn--back(href="/") Back 
