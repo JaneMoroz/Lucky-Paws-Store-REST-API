@@ -62,9 +62,7 @@ exports.getProducts = catchAsync(async (req, res, next) => {
 });
 
 exports.getProduct = catchAsync(async (req, res, next) => {
-  console.log('we here');
   // 1. Get Data
-  console.log(req.params.slug);
   const product = await Product.findOne({ slug: req.params.slug }).populate({
     path: 'reviews',
     fields: 'review rating user',

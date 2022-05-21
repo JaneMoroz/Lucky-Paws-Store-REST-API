@@ -10,7 +10,6 @@ export const addNewProduct = async (data) => {
     });
 
     if (res.data.status === 'success') {
-      console.log('Product is created');
       window.setTimeout(() => {
         location.assign('/manage-products');
       }, 1500);
@@ -30,7 +29,6 @@ export const editProduct = async (productId, data) => {
     });
 
     if (res.data.status === 'success') {
-      console.log('Product is updated');
       window.setTimeout(() => {
         location.assign('/manage-products');
       }, 1500);

@@ -8,7 +8,6 @@ const AppError = require('./../utils/appError');
 ////////////////////////////////////////////////////////////////
 // Stripe
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
-  console.log(req.params);
   // 1. Get cart
   const cart = await Cart.findById(req.params.cartId);
   // const address = req.params.address.split(', ');

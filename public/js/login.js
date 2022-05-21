@@ -14,7 +14,6 @@ export const login = async (email, password) => {
     });
 
     if (res.data.status === 'success') {
-      console.log('You are logged in!');
       window.setTimeout(() => {
         location.assign('/my-account');
       }, 1500);
@@ -34,6 +33,6 @@ export const logout = async () => {
 
     if (res.data.status === 'success') location.assign('/');
   } catch (err) {
-    console.log('You are logged out!');
+    console.log('Smth went wrong!');
   }
 };
