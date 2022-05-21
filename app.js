@@ -48,8 +48,6 @@ app.use(
         'https:',
         'http:',
         'blob:',
-        'https://*.mapbox.com',
-        ,
         'https://*.stripe.com',
         'data:',
         'ws:',
@@ -58,7 +56,7 @@ app.use(
       objectSrc: ["'none'"],
       workerSrc: ["'self'", 'data:', 'blob:'],
       childSrc: ["'self'", 'https:', 'blob:'],
-      imgSrc: ["'self'", 'data:', 'blob:'],
+      imgSrc: ["'self'", 'https: data:'],
       connectSrc: ["'self'", 'blob:', 'https:', 'ws:'],
     },
   })
@@ -106,6 +104,15 @@ app.use(mongoSanitize());
 
 // Data sanitization against XSS
 app.use(xss());
+
+// Prevent parameter pollution
+app.use(
+  hpp({
+    whitelist: ['color', 'style', 'brand', 'animal', 'ratingsAverage', 'price'],
+  })
+);
+
+app.use(compression());
 
 ////////////////////////////////////////////////////////////////
 // Routes
