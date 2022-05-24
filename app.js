@@ -66,7 +66,7 @@ app.use(
 // Implement Cors
 app.use(
   cors({
-    origin: '/',
+    origin: '*',
     credentials: true,
   })
 );
