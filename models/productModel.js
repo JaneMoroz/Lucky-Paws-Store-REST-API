@@ -42,6 +42,9 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Choose a product type.'],
     },
+    subType: {
+      type: String,
+    },
     animal: {
       type: [String],
       required: [true, 'Specify a pet: cat, dog, or etc'],

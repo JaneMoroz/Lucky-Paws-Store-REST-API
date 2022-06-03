@@ -1,12 +1,12 @@
 [
   {
     "_id": "5c88fa8cf4afda39709c2955",
-    "name": "Mushroom Shaped Cat Toy Scratcher",
+    "name": "mushroom shaped toy",
     "price": 25.99,
-    "type": "Toy",
-    "subType": "Scratching Toy",
-    "animal": ["Cat"],
-    "color": ["red/white", "green/ white", "grey/white"],
+    "type": "toys",
+    "subType": "scratching Toy",
+    "animal": ["cat"],
+    "color": ["red/white", "green/white", "grey/white"],
     "features": [
       "Entertain your cat with this scratcher. It can release the cat‘s nature, help you save your house items.",
       "The scratcher can not only be a cat scratcher, but also a toy to play with.",
@@ -22,11 +22,11 @@
   },
   {
     "_id": "5c88fa8cf4afda39709c2961",
-    "name": "Cat Ear Shaped Cat Scratching Pad",
+    "name": "cat ear shaped cat scratching pad",
     "price": 19.99,
-    "type": "Toy",
-    "subType": "Scratching Toy",
-    "animal": ["Cat"],
+    "type": "toys",
+    "subType": "scratching toy",
+    "animal": ["cat"],
     "color": ["kiwi", "blue", "watermelon"],
     "features": [
       "Entertain your cat with this scratcher. It can release the cat‘s nature, help you save your house items.",
@@ -43,11 +43,11 @@
   },
   {
     "_id": "5c88fa8cf4afda39709c295d",
-    "name": "Cat Toy Tooth Cleaning Stick",
+    "name": "tooth cleaning stick",
     "price": 15.99,
-    "type": "Toy",
-    "subType": "Teaser Toy",
-    "animal": ["Cat"],
+    "type": "toys",
+    "subType": "teaser Toy",
+    "animal": ["cat"],
     "style": ["avocado", "cherry"],
     "features": [
       "Let the cat clean her teeth while playing with this cute toy.",
@@ -62,11 +62,11 @@
   },
   {
     "_id": "5c88fa8cf4afda39709c35ed",
-    "name": "Naughty Cat Ceramic Pet Bowls",
+    "name": "naughty cat ceramic cet bowls",
     "price": 49.99,
-    "type": "Feeders",
-    "subType": "Bowl",
-    "animal": ["Cat"],
+    "type": "feeders",
+    "subType": "bowl",
+    "animal": ["cat"],
     "color": ["blue", "red"],
     "features": [
       "These Series are designed with the idea of Ancient Allusions, gives an oriental look..",
@@ -83,11 +83,11 @@
   },
   {
     "_id": "5c88fa8cf4afda39709c2999",
-    "name": "Cactus Shaped Elevated Ceramic Cat Bowl",
+    "name": "cactus shaped ceramic cat bowl",
     "price": 49.99,
-    "type": "Feeders",
-    "subType": "Bowl",
-    "animal": ["Cat"],
+    "type": "feeders",
+    "subType": "bowl",
+    "animal": ["cat"],
     "style": ["single cactus", "double cactus"],
     "features": [
       "The bowl is bacteria resistant and lead-free, making it a safe choice for feeding your small pet.",
@@ -100,11 +100,11 @@
   },
   {
     "_id": "5c88fa8cf4afda39709c7654",
-    "name": "Rabbit Ceramic Pet Drinking Fountain",
+    "name": "rabbit ceramic pet drinking fountain",
     "price": 59.99,
-    "type": "Feeders",
-    "subType": "Drinking Fountain",
-    "animal": ["Cat"],
+    "type": "feeders",
+    "subType": "drinking fountain",
+    "animal": ["cat"],
     "features": [
       "Rabbit Automatic Power Off USB Drinking Fountain is a cute cat water fountain with a steady flow of filtered water.",
       "Each part can be detachable, easy to clean",
@@ -116,12 +116,12 @@
     "countInStock": 200
   },
   {
-    "_id": "5c88fa8cf4afda39709c4321",
-    "name": "Cactus Style Cat Drinking Fountain",
+    "_id": "5c88fa8cf4afda11109c35ed",
+    "name": "cactus style cat drinking fountain",
     "price": 39.99,
-    "type": "Feeders",
-    "subType": "Drinking Fountain",
-    "animal": ["Cat"],
+    "type": "feeders",
+    "subType": "drinking fountain",
+    "animal": ["cat"],
     "features": [
       "Cactus Automatic Power Off USB Drinking Fountain is a cute cat water fountain with a steady flow of filtered water.",
       "Each part can be detachable, easy to clean",
@@ -130,6 +130,235 @@
     ],
     "primaryImage": "https://i.ibb.co/x5dZRM7/toy4-0.jpg",
     "otherImages": ["https://i.ibb.co/gP3whQ5/toy4-1.jpg"],
+    "countInStock": 100
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c1234",
+    "name": "butcher's food",
+    "price": 9.99,
+    "type": "food",
+    "animal": ["dog"],
+    "features": [
+      "Organic ingredients",
+      "No artificial ingredients",
+      "100% fresh",
+      "Super premium quality"
+    ],
+    "primaryImage": "https://i.ibb.co/pKrDPy9/collection-1.jpg",
+    "otherImages": [
+      "https://i.ibb.co/kDnSLbc/collection-3.jpg",
+      "https://i.ibb.co/LQSf3nW/collection-2.jpg"
+    ],
+    "countInStock": 100
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c1345",
+    "name": "super glasses",
+    "price": 19.99,
+    "brand": "diva",
+    "type": "clothes",
+    "subType": "glasses",
+    "animal": ["dog"],
+    "features": ["Can survive any apocalypse", "Super premium quality"],
+    "primaryImage": "https://i.ibb.co/MszkNYD/collection-5.jpg",
+    "countInStock": 100
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c8764",
+    "name": "reading glasses",
+    "price": 19.99,
+    "brand": "diva",
+    "type": "clothes",
+    "subType": "glasses",
+    "animal": ["cat"],
+    "features": ["Can survive any apocalypse", "Super premium quality"],
+    "primaryImage": "https://i.ibb.co/hdDKksJ/collection-6.jpg",
+    "countInStock": 100
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c1299",
+    "name": "superstar glasses",
+    "price": 29.99,
+    "brand": "diva",
+    "type": "clothes",
+    "subType": "glasses",
+    "animal": ["cat"],
+    "features": ["Can survive any apocalypse", "Super premium quality"],
+    "primaryImage": "https://i.ibb.co/W3GpTtS/collection-4.jpg",
+    "countInStock": 100
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c1774",
+    "name": "graphic bowl",
+    "price": 29.99,
+    "brand": "abba",
+    "type": "feeders",
+    "subType": "bowl",
+    "animal": ["cat", "dog"],
+    "features": [
+      "Premium stainless steel - Made of high-quality stainless steel,anti-corrosion, and heat resistant, the stainless steel dog cat bowl is durable for long-term use and healthy for your beloved pets.",
+      "Easy to wash dishes - The stainless steel bowl is detachable, it’s easy to take it out to wash and keep clean",
+      "Non-Skidding & Flipping - The unique roundish bowl has a rubber or silicone seal underneath the rim which does a good job of holding the bowl in place while your dog dines"
+    ],
+    "primaryImage": "https://i.ibb.co/ngKd6Jm/bowl-2.jpg",
+    "otherImages": ["https://i.ibb.co/r4Y6Ykb/bowl-1.jpg"],
+    "countInStock": 100
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c1201",
+    "name": "gangsta costume",
+    "price": 39.99,
+    "brand": "style beast",
+    "type": "clothes",
+    "animal": ["dog"],
+    "color": ["pink", "orange"],
+    "features": [
+      "Made of super soft material",
+      "Soft material ensures that your pet will not get allergic.",
+      "Easy to put on and take off "
+    ],
+    "primaryImage": "https://i.ibb.co/rfGr1qj/clothes-2.jpg",
+    "otherImages": [
+      "https://i.ibb.co/N3wzKhv/clothes-1.jpg",
+      "https://i.ibb.co/J581sQP/clothes-3.jpg"
+    ],
+    "countInStock": 100
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c0088",
+    "name": "santa helper costume",
+    "price": 39.99,
+    "brand": "style beast",
+    "type": "clothes",
+    "animal": ["dog"],
+    "color": ["green", "red"],
+    "features": [
+      "Made of super soft material",
+      "Soft material ensures that your pet will not get allergic.",
+      "Easy to put on and take off "
+    ],
+    "primaryImage": "https://i.ibb.co/McnFcmk/clothes-5.jpg",
+    "otherImages": [
+      "https://i.ibb.co/d2Bs80h/clothes-4.jpg",
+      "https://i.ibb.co/R2q46bS/clothes-6.jpg"
+    ],
+    "countInStock": 100
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c0506",
+    "name": "little cuttie costume",
+    "price": 39.99,
+    "brand": "style beast",
+    "type": "clothes",
+    "animal": ["dog"],
+    "style": ["banana", "french fries"],
+    "features": [
+      "Made of super soft material",
+      "Soft material ensures that your pet will not get allergic.",
+      "Easy to put on and take off "
+    ],
+    "primaryImage": "https://i.ibb.co/2KL4D9K/clothes-8.jpg",
+    "otherImages": ["https://i.ibb.co/X4qqMNZ/clothes-7.jpg"],
+    "countInStock": 100
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c1011",
+    "name": "dreamer bed",
+    "price": 49.99,
+    "brand": "abba",
+    "type": "beds",
+    "animal": ["dog"],
+    "features": [
+      "Use super soft and smooth material to care for your pets' skin, giving your pet the perfect place to snooze on with a maximum sense of security.",
+      "Let your pet sink into a place full of relaxation to sleep, away from fatigue and stress.",
+      "Features anti-skid bottom, the pet bed will not move around because of the active nature of your pet."
+    ],
+    "primaryImage": "https://i.ibb.co/JnKsKNR/bed-1.jpg",
+    "otherImages": ["https://i.ibb.co/NC0BPjk/bed-2.jpg"],
+    "countInStock": 100
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c1992",
+    "name": "super cloud bed",
+    "price": 49.99,
+    "brand": "abba",
+    "type": "beds",
+    "animal": ["dog"],
+    "color": ["grey", "brown", "white"],
+    "features": [
+      "Use super soft and smooth material to care for your pets' skin, giving your pet the perfect place to snooze on with a maximum sense of security.",
+      "Let your pet sink into a place full of relaxation to sleep, away from fatigue and stress.",
+      "Features anti-skid bottom, the pet bed will not move around because of the active nature of your pet."
+    ],
+    "primaryImage": "https://i.ibb.co/PtX3qZB/bed-3.jpg",
+    "countInStock": 100
+  },
+  {
+    "_id": "5c88fa8cf4afda39709a4234",
+    "name": "orange super bowl",
+    "price": 9.99,
+    "brand": "abba",
+    "type": "toys",
+    "subType": "tough toy",
+    "style": ["1 ball", "2 balls", "3 balls"],
+    "animal": ["dog"],
+    "features": [
+      "Rubber, bite-resistant",
+      "The shape of the ball and the elasticity can be rolled to stimulate the dog to chase instinct",
+      "Suitable for: any sized dog."
+    ],
+    "primaryImage": "https://i.ibb.co/CKBsZ7C/toy-2.jpg",
+    "otherImages": ["https://i.ibb.co/yV8HwKy/toy-1.jpg"],
+    "countInStock": 100
+  },
+  {
+    "_id": "5c88fa8cf4afda39709a4235",
+    "name": "orange super bone",
+    "price": 9.99,
+    "brand": "abba",
+    "type": "toys",
+    "subType": "tough toy",
+    "color": ["pink", "yellow", "green"],
+    "animal": ["dog"],
+    "features": [
+      "Rubber, bite-resistant",
+      "The shape and the elasticity can be rolled to stimulate the dog to chase instinct",
+      "Suitable for: any sized dog."
+    ],
+    "primaryImage": "https://i.ibb.co/cbQbyBQ/toy-3.jpg",
+    "countInStock": 100
+  },
+  {
+    "_id": "5c88fa8cf4afda39788c1234",
+    "name": "marvel toy",
+    "price": 9.99,
+    "type": "toys",
+    "subType": "tough toy",
+    "animal": ["dog"],
+    "style": ["bat duck", "super pig"],
+    "features": [
+      "Rubber, bite-resistant",
+      "The shape and the elasticity can be rolled to stimulate the dog to chase instinct",
+      "Suitable for: any sized dog."
+    ],
+    "primaryImage": "https://i.ibb.co/jrG65PF/toy-4.jpg",
+    "otherImages": ["https://i.ibb.co/jwGyKxf/toy-5.jpg"],
+    "countInStock": 100
+  },
+  {
+    "_id": "5c88fa8cf4afda39112c1234",
+    "name": "plush toy",
+    "price": 9.99,
+    "type": "toys",
+    "subType": "plush toy",
+    "style": ["bear", "unicorn", "potato"],
+    "animal": ["dog"],
+    "features": [
+      "Bite-resistant",
+      "The shape and the elasticity can be rolled to stimulate the dog to chase instinct",
+      "Suitable for: any sized dog."
+    ],
+    "primaryImage": "https://i.ibb.co/VVYkpqc/toy-6.jpg",
     "countInStock": 100
   }
 ]
