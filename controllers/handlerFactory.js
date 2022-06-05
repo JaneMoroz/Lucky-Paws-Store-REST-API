@@ -36,9 +36,8 @@ exports.getOne = (Model, popOptions) =>
       return next(new AppError('No document found with that ID', 404));
     }
 
-    console.log(req.params.userId);
-    console.log(doc.user._id);
     if (
+      doc.user &&
       req.params.userId &&
       String(req.params.userId) !== String(doc.user._id)
     ) {
