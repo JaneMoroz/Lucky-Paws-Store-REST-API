@@ -36,7 +36,7 @@ const productSchema = new mongoose.Schema(
     },
     brand: {
       type: String,
-      default: 'LuckyPaws',
+      default: 'lucky paws',
     },
     type: {
       type: String,

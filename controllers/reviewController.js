@@ -7,6 +7,13 @@ exports.setProductUserId = (req, res, next) => {
   next();
 };
 
+////////////////////////////////////////////////////////////////
+// Get "me" Middleware
+exports.getMe = (req, res, next) => {
+  req.params.userId = req.user.id;
+  next();
+};
+
 exports.getAllReviews = factory.getAll(Review);
 exports.getReview = factory.getOne(Review);
 exports.createReview = factory.createOne(Review);

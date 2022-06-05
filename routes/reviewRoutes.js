@@ -6,18 +6,34 @@ const router = express.Router({ mergeParams: true });
 
 router.use(authController.protect);
 
+////////////////////////////////////////////////////////////////
+// General Review Routes
+// All reviews can be only accessed by Admin, NEW review can be created only by User
+
 router
   .route('/')
-  .get(reviewController.getAllReviews)
+  .get(authController.restrictTo('admin'), reviewController.getAllReviews)
   .post(
     authController.restrictTo('user'),
     reviewController.setProductUserId,
     reviewController.createReview
   );
 
+////////////////////////////////////////////////////////////////
+// Customer Review Routes
+router
+  .route('/myReviews')
+  .get(reviewController.getMe, reviewController.getAllReviews);
+
+router
+  .route('/myReviews/:id')
+  .get(reviewController.getMe, reviewController.getReview);
+
+////////////////////////////////////////////////////////////////
+// Other Routes
 router
   .route('/:id')
-  .get(reviewController.getReview)
+  .get(authController.restrictTo('admin'), reviewController.getReview)
   .patch(
     authController.restrictTo('user', 'admin'),
     reviewController.updateReview

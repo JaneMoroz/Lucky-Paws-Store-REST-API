@@ -36,10 +36,15 @@ exports.getOne = (Model, popOptions) =>
       return next(new AppError('No document found with that ID', 404));
     }
 
-    if (req.params.userId && String(req.params.userId) !== String(doc.user)) {
+    console.log(req.params.userId);
+    console.log(doc.user._id);
+    if (
+      req.params.userId &&
+      String(req.params.userId) !== String(doc.user._id)
+    ) {
       return next(
         new AppError(
-          'There is an error with accessing this order, try again later',
+          'There is an error with accessing this page, try again later',
           404
         )
       );
