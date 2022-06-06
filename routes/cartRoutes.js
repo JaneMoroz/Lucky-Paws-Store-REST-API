@@ -8,15 +8,29 @@ const router = express.Router({ mergeParams: true });
 
 router.use(authController.protect);
 
-router.route('/').post(cartController.addCartItem);
+////////////////////////////////////////////////////////////////
+// Customer Cart Routes
 router
-  .route('/:id')
-  .get(cartController.getCartItems)
-  .delete(cartController.deleteCartItems);
+  .route('/myCart')
+  .get(cartController.getMe, cartController.getCarts)
+  .delete(cartController.getMe, cartController.deleteCartItems);
 
 router
-  .route('/:id/:cartItemId')
+  .route('/myCart/:id')
+  .get(cartController.getMe, cartController.getCartItems)
   .patch(cartController.updateCartItem)
   .delete(cartController.deleteCartItem);
+
+////////////////////////////////////////////////////////////////
+// Rest of the Routes
+
+router.route('/').post(cartController.addCartItem);
+
+// router.route('/:id').get(cartController.getCartItems);
+
+// router
+//   .route('/:id/:cartItemId')
+//   .patch(cartController.updateCartItem)
+//   .delete(cartController.deleteCartItem);
 
 module.exports = router;

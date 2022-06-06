@@ -41,12 +41,7 @@ exports.getOne = (Model, popOptions) =>
       req.params.userId &&
       String(req.params.userId) !== String(doc.user._id)
     ) {
-      return next(
-        new AppError(
-          'There is an error with accessing this page, try again later',
-          404
-        )
-      );
+      return next(new AppError('Something went wrong, try again later', 404));
     }
 
     res.status(200).json({

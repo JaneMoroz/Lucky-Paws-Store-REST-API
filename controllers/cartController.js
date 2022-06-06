@@ -3,6 +3,13 @@ const Cart = require('./../models/cartModel');
 const factory = require('./handlerFactory');
 const AppError = require('./../utils/appError');
 
+////////////////////////////////////////////////////////////////
+// Get "me" Middleware
+exports.getMe = (req, res, next) => {
+  req.params.userId = req.user.id;
+  next();
+};
+
 // Add item to the cart
 exports.addCartItem = catchAsync(async (req, res, next) => {
   // Get Cart Item
@@ -56,6 +63,9 @@ exports.addCartItem = catchAsync(async (req, res, next) => {
     }
   }
 });
+
+// Get all carts
+exports.getCarts = factory.getAll(Cart);
 
 // Get all items in the Cart
 exports.getCartItems = factory.getOne(Cart);
