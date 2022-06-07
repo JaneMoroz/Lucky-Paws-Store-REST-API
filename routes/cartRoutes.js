@@ -13,11 +13,10 @@ router.use(authController.protect);
 router
   .route('/myCart')
   .get(cartController.getMe, cartController.getCarts)
-  .delete(cartController.getMe, cartController.deleteCartItems);
+  .post(cartController.createCart)
+  .delete(cartController.deleteCart);
 
-router
-  .route('/myCart/:id')
-  .get(cartController.getMe, cartController.getCartItems);
+router.route('/myCart/:id').get(cartController.getMe, cartController.getCart);
 
 router.route('/myCart/:id/:cartItemId').patch(cartController.updateCartItem);
 

@@ -10,6 +10,38 @@ exports.getMe = (req, res, next) => {
   next();
 };
 
+// Create cart
+exports.createCart = catchAsync(async (req, res, next) => {
+  // Get Cart Item
+  let cartItems = [...req.body];
+
+  const cart = await Cart.create({
+    user: req.user,
+  });
+
+  if (cartItems.length !== 0) {
+    cartItems.forEach((cartItem) => {
+      cart.products.push(cartItem);
+      cart.updated = Date.now();
+    });
+
+    const updatedCart = await cart.save();
+    res.status(201).json({
+      status: 'success',
+      data: {
+        data: updatedCart,
+      },
+    });
+  } else {
+    res.status(201).json({
+      status: 'success',
+      data: {
+        data: cart,
+      },
+    });
+  }
+});
+
 // Add item to the cart
 exports.addCartItem = catchAsync(async (req, res, next) => {
   // Get Cart Item
@@ -67,11 +99,11 @@ exports.addCartItem = catchAsync(async (req, res, next) => {
 // Get all carts
 exports.getCarts = factory.getAll(Cart);
 
-// Get all items in the Cart
-exports.getCartItems = factory.getOne(Cart);
+// Get cart
+exports.getCart = factory.getOne(Cart);
 
 // Delete all items in the Cart
-exports.deleteCartItems = factory.deleteOne(Cart);
+exports.deleteCart = factory.deleteOne(Cart);
 
 // Update Cart Item
 exports.updateCartItem = catchAsync(async (req, res, next) => {
