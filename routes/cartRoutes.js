@@ -19,10 +19,7 @@ router
   .route('/myCart/:id')
   .get(cartController.getMe, cartController.getCartItems);
 
-router
-  .route('/myCart/:id/:cartItemId')
-  .patch(cartController.updateCartItem)
-  .delete(cartController.deleteCartItem);
+router.route('/myCart/:id/:cartItemId').patch(cartController.updateCartItem);
 
 ////////////////////////////////////////////////////////////////
 // Add Cart Item

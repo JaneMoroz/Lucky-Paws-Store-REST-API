@@ -81,20 +81,29 @@ exports.updateCartItem = catchAsync(async (req, res, next) => {
     return next(new AppError('No cart found with that ID', 404));
   }
 
-  const quantity = req.body.quantity;
-  const style = req.body.style;
-  const color = req.body.color;
+  const { quantity, style, color } = req.body;
 
   const product = userCart.products.find(
     (el) => el.id === req.params.cartItemId
   );
 
-  product.quantity = quantity !== undefined ? quantity : product.quantity;
+  if (quantity !== undefined) {
+    if (quantity !== 0) {
+      product.quantity = quantity;
+    } else {
+      // Delete cart item if quantity === 0
+      const itemIndex = userCart.products.findIndex(
+        (el) => el.id === req.params.cartItemId
+      );
 
-  if (product.style)
-    product.style = style !== undefined ? style : product.style;
-  if (product.color)
-    product.color = color !== undefined ? color : product.color;
+      if (itemIndex !== 0) {
+        userCart.products = userCart.products.splice(itemIndex, 1);
+      } else userCart.products.shift();
+    }
+  }
+
+  if (product.style && style !== undefined) product.style = style;
+  if (product.color && color !== undefined) product.color = color;
 
   const updatedCart = await userCart.save();
   res.status(200).json({
@@ -102,46 +111,5 @@ exports.updateCartItem = catchAsync(async (req, res, next) => {
     data: {
       data: updatedCart,
     },
-  });
-});
-
-// Delete Cart Item
-exports.deleteCartItem = catchAsync(async (req, res, next) => {
-  // Get cart
-  const userCart = await Cart.findById(req.params.id);
-
-  if (!userCart) {
-    return next(new AppError('No cart found with that ID', 404));
-  }
-
-  // Find cart item by id
-  const cartItem = userCart.products.find(
-    (product) => product.id === req.params.cartItemId
-  );
-
-  if (!cartItem) {
-    return next(
-      new AppError('No product found with that ID in your cart', 404)
-    );
-  }
-
-  // If the quantity is more than 1, decrease cart item quantity by 1,
-  // if the quantity is equal 1, delete cart item
-  if (cartItem.quantity > 1) {
-    cartItem.quantity -= 1;
-  } else {
-    const itemIndex = userCart.products.findIndex(
-      (el) => el.id === req.params.cartItemId
-    );
-
-    if (itemIndex !== 0) {
-      userCart.products = userCart.products.splice(itemIndex, 1);
-    } else userCart.products.shift();
-  }
-
-  await userCart.save();
-  res.status(204).json({
-    status: 'success',
-    data: null,
   });
 });
