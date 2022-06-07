@@ -17,12 +17,15 @@ router
 
 router
   .route('/myCart/:id')
-  .get(cartController.getMe, cartController.getCartItems)
+  .get(cartController.getMe, cartController.getCartItems);
+
+router
+  .route('/myCart/:id/:cartItemId')
   .patch(cartController.updateCartItem)
   .delete(cartController.deleteCartItem);
 
 ////////////////////////////////////////////////////////////////
-// Rest of the Routes
+// Add Cart Item
 
 router.route('/').post(cartController.addCartItem);
 
