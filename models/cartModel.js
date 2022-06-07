@@ -76,6 +76,15 @@ cartSchema.pre(/^find/, function (next) {
   next();
 });
 
+// Populate product Middleware
+cartSchema.pre('save', function (next) {
+  this.populate({
+    path: 'products.product',
+    select: 'name primaryImage slug',
+  });
+  next();
+});
+
 // Calculate subtotal, taxes, total
 cartSchema.pre('save', function (next) {
   const cartItemsSubtotalArr = this.products.map(
