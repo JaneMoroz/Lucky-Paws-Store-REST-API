@@ -15,31 +15,34 @@ exports.createCart = catchAsync(async (req, res, next) => {
   // Get Cart Item
   let cartItems = [...req.body];
 
-  const cart = await Cart.create({
-    user: req.user,
-  });
+  // Find user's cart and replace cartItems, if doesnt exist => create new cart
+  const userCart = await Cart.findOne({ user: req.user.id, ordered: false });
+  let updatedCart = {};
 
-  if (cartItems.length !== 0) {
+  if (!userCart) {
+    const cart = await Cart.create({
+      user: req.user,
+    });
     cartItems.forEach((cartItem) => {
       cart.products.push(cartItem);
       cart.updated = Date.now();
     });
-
-    const updatedCart = await cart.save();
-    res.status(201).json({
-      status: 'success',
-      data: {
-        data: updatedCart,
-      },
-    });
+    updatedCart = await cart.save();
   } else {
-    res.status(201).json({
-      status: 'success',
-      data: {
-        data: cart,
-      },
+    userCart.products = [];
+    cartItems.forEach((cartItem) => {
+      userCart.products.push(cartItem);
+      userCart.updated = Date.now();
     });
+    updatedCart = await userCart.save();
   }
+
+  res.status(201).json({
+    status: 'success',
+    data: {
+      data: updatedCart,
+    },
+  });
 });
 
 // Add item to the cart
