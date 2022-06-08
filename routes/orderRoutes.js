@@ -1,7 +1,8 @@
 const express = require('express');
 const orderController = require('../controllers/orderController');
-const authController = require('./../controllers/authController');
-const viewController = require('./../controllers/viewController');
+const authController = require('../controllers/authController');
+const userController = require('../controllers/userController');
+const viewController = require('../controllers/viewController');
 
 ////////////////////////////////////////////////////////////////
 // Routing
@@ -17,11 +18,11 @@ router.get('/checkout-session/:cartId/', orderController.getCheckoutSession);
 // Customer Order Routes
 router
   .route('/myOrders')
-  .get(authController.getMe, orderController.getAllOrders);
+  .get(userController.getMe, orderController.getAllOrders);
 
 router
   .route('/myOrders/:id')
-  .get(authController.getMe, orderController.getOrder);
+  .get(userController.getMe, orderController.getOrder);
 
 router.route('/:cartId/').post(orderController.createOrder);
 

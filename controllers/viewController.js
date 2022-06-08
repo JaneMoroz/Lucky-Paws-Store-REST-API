@@ -4,6 +4,7 @@ const Review = require('./../models/reviewModel');
 const Cart = require('./../models/cartModel');
 const User = require('./../models/userModel');
 const APIFeatures = require('./../utils/apiFeatures');
+const catchAsync = require('./../utils/catchAsync');
 
 ////////////////////////////////////////////////////////////////
 // Home Page/Product Page

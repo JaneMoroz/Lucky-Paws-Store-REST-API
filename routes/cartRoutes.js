@@ -1,6 +1,7 @@
 const express = require('express');
 const cartController = require('../controllers/cartController');
-const authController = require('./../controllers/authController');
+const userController = require('../controllers/userController');
+const authController = require('../controllers/authController');
 
 ////////////////////////////////////////////////////////////////
 // Routing
@@ -12,11 +13,11 @@ router.use(authController.protect);
 // Customer Cart Routes
 router
   .route('/myCart')
-  .get(authController.getMe, cartController.getCarts)
+  .get(userController.getMe, cartController.getCarts)
   .post(cartController.updateCart)
   .delete(cartController.deleteCart);
 
-router.route('/myCart/:id').get(authController.getMe, cartController.getCart);
+router.route('/myCart/:id').get(userController.getMe, cartController.getCart);
 
 router.route('/myCart/:id/:cartItemId').patch(cartController.updateCartItem);
 

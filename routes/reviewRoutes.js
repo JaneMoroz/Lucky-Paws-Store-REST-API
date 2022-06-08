@@ -1,6 +1,7 @@
 const express = require('express');
-const reviewController = require('./../controllers/reviewController');
-const authController = require('./../controllers/authController');
+const reviewController = require('../controllers/reviewController');
+const authController = require('../controllers/authController');
+const userController = require('../controllers/userController');
 
 const router = express.Router({ mergeParams: true });
 
@@ -23,11 +24,11 @@ router
 // Customer Review Routes
 router
   .route('/myReviews')
-  .get(authController.getMe, reviewController.getAllReviews);
+  .get(userController.getMe, reviewController.getAllReviews);
 
 router
   .route('/myReviews/:id')
-  .get(authController.getMe, reviewController.getReview);
+  .get(userController.getMe, reviewController.getReview);
 
 ////////////////////////////////////////////////////////////////
 // Other Routes
