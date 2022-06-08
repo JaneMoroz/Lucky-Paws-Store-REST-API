@@ -94,7 +94,7 @@ cartSchema.pre('save', function (next) {
   this.taxes = (this.subtotal * 0.1).toFixed(2);
   const totalAfterTaxes = this.subtotal + this.taxes;
   this.shippingPrice = totalAfterTaxes > 100 ? 0 : 20;
-  this.total = totalAfterTaxes + this.shippingPrice;
+  this.total = (totalAfterTaxes + this.shippingPrice).toFixed(2);
 
   next();
 });

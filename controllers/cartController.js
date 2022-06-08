@@ -3,15 +3,8 @@ const Cart = require('./../models/cartModel');
 const factory = require('./handlerFactory');
 const AppError = require('./../utils/appError');
 
-////////////////////////////////////////////////////////////////
-// Get "me" Middleware
-exports.getMe = (req, res, next) => {
-  req.params.userId = req.user.id;
-  next();
-};
-
-// Create cart
-exports.createCart = catchAsync(async (req, res, next) => {
+// Update cart
+exports.updateCart = catchAsync(async (req, res, next) => {
   // Get Cart Item
   let cartItems = [...req.body];
 

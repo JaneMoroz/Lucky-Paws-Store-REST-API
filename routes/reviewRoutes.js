@@ -23,11 +23,11 @@ router
 // Customer Review Routes
 router
   .route('/myReviews')
-  .get(reviewController.getMe, reviewController.getAllReviews);
+  .get(authController.getMe, reviewController.getAllReviews);
 
 router
   .route('/myReviews/:id')
-  .get(reviewController.getMe, reviewController.getReview);
+  .get(authController.getMe, reviewController.getReview);
 
 ////////////////////////////////////////////////////////////////
 // Other Routes

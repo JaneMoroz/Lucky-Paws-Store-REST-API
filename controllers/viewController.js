@@ -3,8 +3,6 @@ const Order = require('./../models/orderModel');
 const Review = require('./../models/reviewModel');
 const Cart = require('./../models/cartModel');
 const User = require('./../models/userModel');
-const catchAsync = require('./../utils/catchAsync');
-const AppError = require('./../utils/appError');
 const APIFeatures = require('./../utils/apiFeatures');
 
 ////////////////////////////////////////////////////////////////

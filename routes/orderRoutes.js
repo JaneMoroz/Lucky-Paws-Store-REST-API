@@ -17,11 +17,11 @@ router.get('/checkout-session/:cartId/', orderController.getCheckoutSession);
 // Customer Order Routes
 router
   .route('/myOrders')
-  .get(orderController.getMe, orderController.getAllOrders);
+  .get(authController.getMe, orderController.getAllOrders);
 
 router
   .route('/myOrders/:id')
-  .get(orderController.getMe, orderController.getOrder);
+  .get(authController.getMe, orderController.getOrder);
 
 router.route('/:cartId/').post(orderController.createOrder);
 

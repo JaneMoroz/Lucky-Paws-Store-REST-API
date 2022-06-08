@@ -122,13 +122,6 @@ exports.createOrder = catchAsync(async (req, res, next) => {
 //   });
 // };
 
-////////////////////////////////////////////////////////////////
-// Get "me" Middleware
-exports.getMe = (req, res, next) => {
-  req.params.userId = req.user.id;
-  next();
-};
-
 // Get all orders
 exports.getAllOrders = factory.getAll(Order);
 
