@@ -54,7 +54,8 @@ const filterObj = (obj, ...allowedFields) => {
 ////////////////////////////////////////////////////////////////
 // Get "me" Middleware
 exports.getMe = (req, res, next) => {
-  req.params.id = req.user.id;
+  console.log(req.user.id);
+  req.params.userId = req.user.id;
   next();
 };
 

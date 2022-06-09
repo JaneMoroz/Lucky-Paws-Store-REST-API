@@ -12,7 +12,7 @@ router.use(authController.protect);
 ////////////////////////////////////////////////////////////////
 // Stripe
 
-router.get('/checkout-session/:cartId/', orderController.getCheckoutSession);
+router.route('/checkout-session').post(orderController.getCheckoutSession);
 
 ////////////////////////////////////////////////////////////////
 // Customer Order Routes
@@ -37,14 +37,6 @@ router
   .get(
     authController.restrictTo('admin', 'manager'),
     orderController.getAllOrders
-  );
-
-// Change order status routes
-router
-  .route('/:id/pay')
-  .patch(
-    authController.restrictTo('admin', 'manager'),
-    orderController.updateOrderToPaid
   );
 
 router

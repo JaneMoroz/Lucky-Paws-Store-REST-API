@@ -3,68 +3,81 @@ const catchAsync = require('./../utils/catchAsync');
 const Order = require('./../models/orderModel');
 const factory = require('./handlerFactory');
 const Cart = require('../models/cartModel');
+const User = require('../models/userModel');
 const AppError = require('./../utils/appError');
 
 ////////////////////////////////////////////////////////////////
 // Stripe
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
-  // 1. Get cart
-  const cart = await Cart.findById(req.params.cartId);
-  // const address = req.params.address.split(', ');
+  // 1. Get user and cart
+  let userIsValid = false;
+  const userId = req.user.id;
+  const cartId = req.body.cartId;
+  const cart = await Cart.findById(cartId);
 
-  // let customer_details = {
-  //   address: {
-  //     country: `${address[0] ? address[0] : ''}`,
-  //     city: `${address[1] ? address[1] : ''}`,
-  //     postal_code: `${address[2] ? address[2] : ''}`,
-  //     line1: `${address[3] ? address[3] : ''}`,
-  //   },
-  // };
-  // console.log(customer_details);
+  // 2. Check if user is the same
+  if (userId === String(cart.user)) {
+    userIsValid = true;
+  }
 
-  let line_items = [];
-  cart.products.forEach((product) => {
-    const line_item = {
-      quantity: product.quantity,
-      price_data: {
-        currency: 'usd',
-        unit_amount: product.purchasePrice * 100, // price expected in cents
-        product_data: {
-          name: `${product.product.name}`,
-          images: [`${product.product.primaryImage}`],
+  if (userIsValid) {
+    // 3 Create items array
+    let line_items = [];
+    cart.products.forEach((product) => {
+      const line_item = {
+        quantity: product.quantity,
+        price_data: {
+          currency: 'usd',
+          unit_amount: product.purchasePrice * 100, // price expected in cents
+          product_data: {
+            name: `${product.product.name}`,
+            images: [`${product.product.primaryImage}`],
+          },
         },
+      };
+      line_items.push(line_item);
+    });
+
+    // 4. Create checkout session
+    const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      shipping_address_collection: {
+        allowed_countries: [
+          'US',
+          'CA',
+          'GB',
+          'RU',
+          'UA',
+          'KZ',
+          'FI',
+          'LV',
+          'FR',
+          'DE',
+          'ES',
+          'RS',
+          'SK',
+          'TR',
+        ],
       },
-    };
-    line_items.push(line_item);
-  });
+      success_url: `http://127.0.0.1:3001/account/my-orders`,
+      cancel_url: `http://127.0.0.1:3001/cart`,
+      customer_email: req.user.email,
+      client_reference_id: cartId,
+      mode: 'payment',
+      line_items,
+    });
 
-  // 2. Create checkout session
-  const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
-    success_url: `${req.protocol}://${req.get('host')}/my-orders`,
-    cancel_url: `${req.protocol}://${req.get('host')}/cart`,
-    customer_email: req.user.email,
-    client_reference_id: req.params.cartId,
-    mode: 'payment',
-    line_items,
-  });
-
-  // 3. Create session as response
-  res.status(200).json({
-    status: 'success',
-    session,
-  });
+    res.status(200).json({
+      status: 'success',
+      data: {
+        data: session,
+      },
+    });
+  }
 });
 
-// const createBookingCheckout = async (session) => {
-//   const tour = session.client_reference_id;
-//   const user = (await User.findOne({ email: session.customer_email })).id;
-//   const price = session.amount_total / 100;
-//   await Booking.create({ tour, user, price });
-// };
-
-// Create order
+// Create order (no STRIPE)
 exports.createOrder = catchAsync(async (req, res, next) => {
   // Get Cart Items
   const cart = await Cart.findById(req.params.cartId);
@@ -99,61 +112,62 @@ exports.createOrder = catchAsync(async (req, res, next) => {
   });
 });
 
-// exports.webhookCheckout = (req, res, next) => {
-//   const signature = req.headers['stripe-signature'];
-//   let event;
-//   try {
-//     const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
-//     event = stripe.webhooks.constructEvent(
-//       req.body,
-//       signature,
-//       process.env.STRIPE_WEBHOOK_SECRET
-//     );
-//   } catch (err) {
-//     return res.status(400).send(`Webhook error: ${err.message}`);
-//   }
+// Create order (after STRIPE payment complete)
+const createOrderCheckout = async (session) => {
+  const cartId = session.client_reference_id;
+  const cart = await Cart.findById(cartId);
+  const { line1, line2, city, postal_code, country } = session.shipping.address;
+  const userId = (await User.findOne({ email: session.customer_email })).id;
 
-//   if (event.type === 'checkout.session.completed') {
-//     createOrderCheckout(event.data.object);
-//   }
+  // Create order
+  await Order.create({
+    cart: cartId,
+    user: userId,
+    shippingAddress: {
+      address: `${line1 && line1}, ${line2 && line2}`,
+      city,
+      postalCode: postal_code,
+      country,
+    },
+    paymentMethod: session.payment_method_types[0],
+    isPaid: true,
+    paidAt: Date.now(),
+  });
 
-//   res.status(200).json({
-//     received: true,
-//   });
-// };
+  // Mark cart as "ordered"
+  cart.ordered = true;
+  await cart.save();
+};
+
+// Create order after STRIPE payment success
+exports.webhookCheckout = (req, res, next) => {
+  const signature = req.headers['stripe-signature'];
+  let event;
+  try {
+    const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+    event = stripe.webhooks.constructEvent(
+      req.body,
+      signature,
+      process.env.STRIPE_WEBHOOK_SECRET
+    );
+  } catch (err) {
+    return res.status(400).send(`Webhook error: ${err.message}`);
+  }
+
+  if (event.type === 'checkout.session.completed') {
+    createOrderCheckout(event.data.object);
+  }
+
+  res.status(200).json({
+    received: true,
+  });
+};
 
 // Get all orders
 exports.getAllOrders = factory.getAll(Order);
 
 // Get order
 exports.getOrder = factory.getOne(Order);
-
-// Update order to paid
-exports.updateOrderToPaid = catchAsync(async (req, res, next) => {
-  const order = await Order.findById(req.params.id);
-
-  if (!order) {
-    return next(new AppError('No order found with that ID', 404));
-  }
-
-  order.isPaid = true;
-  order.paidAt = Date.now();
-  order.paymentResult = {
-    id: req.body.id,
-    status: req.body.status,
-    update_time: Date.now(),
-    email_address: req.body.payer.email_address,
-  };
-
-  const updatedOrder = await order.save();
-
-  res.status(201).json({
-    status: 'success',
-    data: {
-      data: updatedOrder,
-    },
-  });
-});
 
 // Update order to delivered
 exports.updateOrderToDelivered = catchAsync(async (req, res, next) => {

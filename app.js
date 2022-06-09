@@ -76,7 +76,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-// Exmple of requests limiter
+// Requests limiter
 const limiter = rateLimit({
   max: 100,
   windowMs: 60 * 60 * 1000, // 100 request from one IP in one hour
@@ -84,12 +84,12 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
-// Stripe Webhook
-// app.post(
-//   '/webhook-checkout',
-//   express.raw({ type: 'application/json' }),
-//   orderController.webhookCheckout
-// );
+// Stripe Webhook (must be not JSON, need RAW STREAM) => put it before body parser
+app.post(
+  '/webhook-checkout',
+  express.raw({ type: 'application/json' }),
+  orderController.webhookCheckout
+);
 
 // Express middleware: body parser, reading data from body into rq.body
 app.use(express.json({ limit: '10kb' }));
