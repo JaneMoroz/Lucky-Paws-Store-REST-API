@@ -4,7 +4,7 @@
     "name": "mushroom shaped toy",
     "price": 25.99,
     "type": "toys",
-    "subType": "scratching Toy",
+    "subType": "scratching toy",
     "animal": ["cat"],
     "color": ["red/white", "green/white", "grey/white"],
     "features": [
@@ -23,7 +23,7 @@
   {
     "_id": "5c88fa8cf4afda39709c2961",
     "name": "cat ear shaped cat scratching pad",
-    "price": 19.99,
+    "price": 18.99,
     "type": "toys",
     "subType": "scratching toy",
     "animal": ["cat"],
@@ -154,7 +154,7 @@
   {
     "_id": "5c88fa8cf4afda39709c1345",
     "name": "super glasses",
-    "price": 19.99,
+    "price": 18.99,
     "brand": "diva",
     "type": "clothes",
     "subType": "glasses",
@@ -166,7 +166,7 @@
   {
     "_id": "5c88fa8cf4afda39709c8764",
     "name": "reading glasses",
-    "price": 19.99,
+    "price": 18.99,
     "brand": "diva",
     "type": "clothes",
     "subType": "glasses",
@@ -178,7 +178,7 @@
   {
     "_id": "5c88fa8cf4afda39709c1299",
     "name": "superstar glasses",
-    "price": 29.99,
+    "price": 28.99,
     "brand": "diva",
     "type": "clothes",
     "subType": "glasses",

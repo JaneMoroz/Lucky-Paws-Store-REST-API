@@ -20,10 +20,19 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     userIsValid = true;
   }
 
+  console.log(userId);
+
   if (userIsValid) {
     // 3 Create items array
     let line_items = [];
     cart.products.forEach((product) => {
+      var description = 'default';
+      if (product.color !== undefined) {
+        description = `color: ${product.color}`;
+      }
+      if (product.style !== undefined) {
+        description = `style: ${product.style}`;
+      }
       const line_item = {
         quantity: product.quantity,
         price_data: {
@@ -32,6 +41,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
           product_data: {
             name: `${product.product.name}`,
             images: [`${product.product.primaryImage}`],
+            description,
           },
         },
       };
