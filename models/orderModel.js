@@ -66,6 +66,9 @@ OrderSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'cart',
     select: 'products subtotal taxes shippingPrice total',
+  }).populate({
+    path: 'user',
+    select: 'name',
   });
   next();
 });
