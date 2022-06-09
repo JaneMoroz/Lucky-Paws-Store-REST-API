@@ -30,12 +30,15 @@ router.route('/:cartId/').post(orderController.createOrder);
 // Admin/ Manager Order Routes
 router
   .route('/:id')
-  .get(authController.restrictTo('admin', 'manager'), orderController.getOrder);
+  .get(
+    authController.restrictTo('admin', 'manager', 'test'),
+    orderController.getOrder
+  );
 
 router
   .route('/')
   .get(
-    authController.restrictTo('admin', 'manager'),
+    authController.restrictTo('admin', 'manager', 'test'),
     orderController.getAllOrders
   );
 

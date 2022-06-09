@@ -26,10 +26,12 @@ router.patch(
   userController.updateMe
 );
 
+router
+  .route('/')
+  .get(authController.restrictTo('admin', 'test'), userController.getAllUsers);
+
 // Restricts all routes which come after
 router.use(authController.restrictTo('admin'));
-
-router.route('/').get(userController.getAllUsers);
 
 router
   .route('/:id')
