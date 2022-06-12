@@ -120,20 +120,10 @@ app.use(compression());
 
 // Views
 app.use('/', viewRouter);
-
-// Products
 app.use('/api/v1/products', productRoutes);
-
-// Users
 app.use('/api/v1/users', userRouter);
-
-// Reviews
 app.use('/api/v1/reviews', reviewRouter);
-
-// Cart
 app.use('/api/v1/cart', cartRouter);
-
-// Order
 app.use('/api/v1/order', orderRouter);
 
 ////////////////////////////////////////////////////////////////

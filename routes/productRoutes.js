@@ -7,6 +7,7 @@ const reviewRouter = require('../routes/reviewRoutes');
 // Routing
 const router = express.Router();
 
+// Get products reviews
 router.use('/:productId/reviews', reviewRouter);
 
 router

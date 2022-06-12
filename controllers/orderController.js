@@ -20,8 +20,6 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     userIsValid = true;
   }
 
-  console.log(userId);
-
   if (userIsValid) {
     // 3 Create items array
     let line_items = [];
@@ -89,8 +87,15 @@ exports.createOrder = catchAsync(async (req, res, next) => {
   // Get Cart Items
   const cart = await Cart.findById(req.params.cartId);
 
+  // Check User
+  const userId = req.user.id;
+
   if (!cart) {
     return next(new AppError('No cart found with that ID', 404));
+  }
+
+  if (String(cart.user) !== userId) {
+    return next(new AppError('Something went wrong, try again later', 404));
   }
 
   // Create order
@@ -125,13 +130,17 @@ const createOrderCheckout = async (session) => {
   const cart = await Cart.findById(cartId);
   const { line1, line2, city, postal_code, country } = session.shipping.address;
   const userId = (await User.findOne({ email: session.customer_email })).id;
+  const addressLine = `${line1}`;
+  if (line2) {
+    addressLine = `${line1}, ${line2}`;
+  }
 
   // Create order
   await Order.create({
     cart: cartId,
     user: userId,
     shippingAddress: {
-      address: `${line1 && line1}, ${line2 && line2}`,
+      address: addressLine,
       city,
       postalCode: postal_code,
       country,

@@ -6,15 +6,21 @@ const cartItemSchema = new mongoose.Schema(
     product: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Product',
+      required: true,
     },
-    productId: String,
-    style: String,
-    color: String,
-    quantity: Number,
+    style: {
+      type: String,
+    },
+    color: {
+      type: String,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    },
     purchasePrice: {
       required: true,
       type: Number,
-      default: 0,
     },
   },
   {
@@ -42,19 +48,15 @@ const cartSchema = new mongoose.Schema(
     },
     subtotal: {
       type: Number,
-      default: 0,
     },
     taxes: {
       type: Number,
-      default: 0,
     },
     shippingPrice: {
       type: Number,
-      default: 0,
     },
     total: {
       type: Number,
-      default: 0,
     },
     ordered: {
       type: Boolean,

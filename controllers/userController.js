@@ -54,7 +54,6 @@ const filterObj = (obj, ...allowedFields) => {
 ////////////////////////////////////////////////////////////////
 // Get "me" Middleware
 exports.getMe = (req, res, next) => {
-  console.log(req.user.id);
   req.params.userId = req.user.id;
   next();
 };
@@ -97,7 +96,7 @@ exports.getAllUsers = factory.getAll(User);
 // Get User
 exports.getUser = factory.getOne(User);
 
-// Update User (Admin)
+// Update User
 exports.updateUser = factory.updateOne(User);
 
 // Delete user

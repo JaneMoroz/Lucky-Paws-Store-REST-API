@@ -28,7 +28,10 @@ exports.getAll = (Model) =>
 // Get one
 exports.getOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
-    let query = Model.findById(req.params.id);
+    let queryId = req.params.id;
+    // for "user/me" get route
+    if (!queryId) queryId = req.params.userId;
+    let query = Model.findById(queryId);
     if (popOptions) query = query.populate(popOptions);
     const doc = await query;
 
