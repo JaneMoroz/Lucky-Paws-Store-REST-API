@@ -130,9 +130,12 @@ const createOrderCheckout = async (session) => {
   const cart = await Cart.findById(cartId);
   const { line1, line2, city, postal_code, country } = session.shipping.address;
   const userId = (await User.findOne({ email: session.customer_email })).id;
-  const addressLine = `${line1}`;
+  let addressLine = '';
+  if (line1) {
+    addressLine.concat(line1);
+  }
   if (line2) {
-    addressLine = `${line1}, ${line2}`;
+    addressLine.concat(', ', line2);
   }
 
   // Create order
@@ -157,6 +160,7 @@ const createOrderCheckout = async (session) => {
 
 // Create order after STRIPE payment success
 exports.webhookCheckout = (req, res, next) => {
+  console.log('Webhook Checkout');
   const signature = req.headers['stripe-signature'];
   let event;
   try {
@@ -171,6 +175,7 @@ exports.webhookCheckout = (req, res, next) => {
   }
 
   if (event.type === 'checkout.session.completed') {
+    console.log('Completed, creating order');
     createOrderCheckout(event.data.object);
   }
 
