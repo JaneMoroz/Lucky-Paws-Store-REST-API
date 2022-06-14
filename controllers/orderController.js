@@ -132,10 +132,10 @@ const createOrderCheckout = async (session) => {
   const userId = (await User.findOne({ email: session.customer_email })).id;
   let addressLine = '';
   if (line1) {
-    addressLine.concat(line1);
+    addressLine = addressLine.concat(line1);
   }
   if (line2) {
-    addressLine.concat(', ', line2);
+    addressLine = addressLine.concat(', ', line2);
   }
 
   // Create order
