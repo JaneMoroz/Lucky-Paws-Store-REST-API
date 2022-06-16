@@ -17,10 +17,15 @@ router.patch('/resetPassword/:token', authController.resetPassword);
 // Protects all routes which come after
 router.use(authController.protect);
 
-router.patch('/updateMyPassword', authController.updatePassword);
+router.patch(
+  '/updateMyPassword',
+  authController.restrictTo('admin', 'manager', 'user'),
+  authController.updatePassword
+);
 router.get('/me', userController.getMe, userController.getUser);
 router.patch(
   '/updateMe',
+  authController.restrictTo('admin', 'manager', 'user'),
   userController.uploadUserPhoto,
   userController.resizeUserPhoto,
   userController.updateMe

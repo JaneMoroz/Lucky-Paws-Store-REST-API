@@ -18,7 +18,7 @@ router
     reviewController.getAllReviews
   )
   .post(
-    authController.restrictTo('user'),
+    authController.restrictTo('user', 'test'),
     reviewController.setProductUserId,
     reviewController.createReview
   );
