@@ -126,6 +126,7 @@ exports.createOrder = catchAsync(async (req, res, next) => {
 
 // Create order (after STRIPE payment complete)
 const createOrderCheckout = async (session) => {
+  console.log(session);
   const cartId = session.client_reference_id;
   const cart = await Cart.findById(cartId);
   const { line1, line2, city, postal_code, country } = session.shipping.address;
@@ -174,8 +175,11 @@ exports.webhookCheckout = (req, res, next) => {
     return res.status(400).send(`Webhook error: ${err.message}`);
   }
 
+  console.log(event);
+
   if (event.type === 'checkout.session.completed') {
     console.log('Completed, creating order');
+    console.log(event.data.object);
     createOrderCheckout(event.data.object);
   }
 
